@@ -1,10 +1,12 @@
 from dotenv import load_dotenv
 load_dotenv()
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from openai import OpenAI
 import os
+import json   
 
 app = FastAPI()
 
@@ -31,23 +33,20 @@ def analyze(data: Input):
         response = client.responses.create(
             model="gpt-4.1-mini",
             input=f"""
-            Analyze these symptoms: {data.symptoms}
-
-            Return JSON format:
-            {{
-              "disease": "...",
-              "health_score": "...",
-              "explanation": "...",
-              "recommendation": "..."
-            }}
-            """
+Analyze these symptoms: {data.symptoms}
+Return JSON with:
+- disease
+- health_score
+- explanation
+- recommendation
+""",
+            text={"format": {"type": "json_object"}}
         )
 
         result_text = response.output[0].content[0].text
+        parsed = json.loads(result_text)
 
-        return {
-            "result": result_text
-        }
+        return parsed
 
     except Exception as e:
         return {"error": str(e)}
