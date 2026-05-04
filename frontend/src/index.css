@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+}
