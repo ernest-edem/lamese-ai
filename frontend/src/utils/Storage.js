@@ -1,9 +1,26 @@
-export const saveResult = (data) => {
-  const history = JSON.parse(localStorage.getItem("history")) || [];
-  history.push({ ...data, date: new Date().toISOString() });
-  localStorage.setItem("history", JSON.stringify(history));
-};
+const KEY = "health_history";
 
-export const getHistory = () => {
-  return JSON.parse(localStorage.getItem("history")) || [];
-};
+// ✅ Get cleaned history
+export function getHistory() {
+  const data = JSON.parse(localStorage.getItem(KEY)) || [];
+
+  return data.filter(
+    (item) =>
+      item &&
+      item.disease &&
+      item.disease !== "Unknown" &&
+      Number(item.health_score) > 0
+  );
+}
+
+// ✅ Save result
+export function saveResult(result) {
+  const history = JSON.parse(localStorage.getItem(KEY)) || [];
+  history.push(result);
+  localStorage.setItem(KEY, JSON.stringify(history));
+}
+
+// ✅ Clear all history
+export function clearHistory() {
+  localStorage.removeItem(KEY);
+}

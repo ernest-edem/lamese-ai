@@ -1,33 +1,54 @@
-import { FiActivity, FiClock, FiUser } from "react-icons/fi";
+import { FiPlus, FiActivity, FiClock } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
-export default function Sidebar({ setPage }) {
+export default function Sidebar({ onCheckHealth }) {
+  const navigate = useNavigate();
+
+  const handleCheckHealth = () => {
+    if (onCheckHealth) {
+      // ✅ Dashboard: open modal
+      onCheckHealth();
+    } else {
+      // ✅ Other pages: redirect to dashboard
+      navigate("/");
+    }
+  };
+
   return (
-    <aside className="w-64 bg-gray-900 text-white p-5 hidden md:flex flex-col">
-      {/* User */}
-      <div className="flex items-center space-x-3 mb-10">
-        <FiUser size={30} />
-        <div>
-          <p className="font-semibold">User</p>
-          <p className="text-sm text-gray-400">ID: 001</p>
-        </div>
-      </div>
+    <div className="w-64 bg-gray-900 text-white p-6 flex flex-col min-h-screen">
 
-      {/* Nav */}
-      <nav className="space-y-4">
-        <button
-          onClick={() => setPage("dashboard")}
-          className="flex items-center w-full p-3 rounded hover:bg-gray-700"
-        >
-          <FiActivity className="mr-2" /> Check Health
-        </button>
+      {/* LOGO */}
+      <h2 className="text-xl font-bold mb-8 tracking-wide">
+        LAMESE AI
+      </h2>
 
-        <button
-          onClick={() => setPage("history")}
-          className="flex items-center w-full p-3 rounded hover:bg-gray-700"
-        >
-          <FiClock className="mr-2" /> History
-        </button>
-      </nav>
-    </aside>
+      {/* CHECK HEALTH */}
+      <button
+        onClick={handleCheckHealth}
+        className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition"
+      >
+        <FiPlus />
+        <span>Check Health</span>
+      </button>
+
+      {/* ANALYSIS */}
+      <button
+        onClick={() => navigate("/analysis")}
+        className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition mt-2"
+      >
+        <FiActivity />
+        <span>Analysis</span>
+      </button>
+
+      {/* HISTORY */}
+      <button
+        onClick={() => navigate("/history")}
+        className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition mt-2"
+      >
+        <FiClock />
+        <span>History</span>
+      </button>
+
+    </div>
   );
 }
