@@ -28,7 +28,7 @@ export default function Sidebar({ onCheckHealth }) {
         className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition"
       >
         <FiPlus />
-        <span>Check Health</span>
+        <span>Dashboard</span>
       </button>
 
       {/* ANALYSIS */}

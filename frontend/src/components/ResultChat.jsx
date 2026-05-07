@@ -1,82 +1,54 @@
 import HealthScoreRing from "./HealthScoreRing";
 
 export default function ResultChat({ result }) {
-  // 🧠 Streaming mode (ChatGPT-style)
+  // 🧠 STREAMING MODE
   if (result?.streaming) {
     return (
-      <div className="mt-6 max-w-2xl">
-        <div className="bg-blue-500 text-white p-4 rounded-lg whitespace-pre-wrap">
-          {result.text}
-          <span className="typing-cursor">|</span>
-        </div>
+      <div className="mt-6 bg-black text-green-400 p-4 rounded-lg font-mono whitespace-pre-wrap">
+        {result.text}
+        <span className="typing-cursor">|</span>
       </div>
     );
   }
 
-  // ❌ Error state
-  if (result?.error) {
-    return (
-      <div className="mt-6 text-red-500 bg-red-100 p-4 rounded">
-        {result.error}
-      </div>
-    );
-  }
-
-  // 🛑 If no structured result yet
   if (!result) return null;
 
   const isHighRisk = result.risk_level === "High";
 
   return (
-    <div className="mt-6 space-y-4 max-w-2xl">
+    <div className="mt-6 space-y-4">
 
-      {/* 🚑 Emergency Alert */}
+      {/* 🚨 ALERT */}
       {isHighRisk && (
         <div className="bg-red-600 text-white p-4 rounded-lg animate-pulse">
           🚨 HIGH RISK DETECTED – Seek medical attention immediately
         </div>
       )}
 
-      {/* ⚠️ Red Flags */}
-      {result.red_flags?.length > 0 && (
-        <div className="bg-red-100 border border-red-400 p-4 rounded">
-          <h2 className="font-bold text-red-600">⚠️ Red Flags</h2>
-          <ul className="list-disc ml-4">
-            {result.red_flags.map((flag, i) => (
-              <li key={i}>{flag}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* 🤖 Disease */}
+      {/* 🤖 DISEASE */}
       <div className="bg-blue-500 text-white p-4 rounded-lg">
-        🤖 {result.disease || "Analyzing..."}
+        🤖 {result.disease}
       </div>
 
-      {/* 📊 Health Score */}
+      {/* 📊 SCORE */}
       <div className="bg-white p-4 rounded shadow">
-        <HealthScoreRing score={result.health_score || 0} />
+        <HealthScoreRing score={result.health_score} />
         <p className="mt-2 font-bold">
-          Risk Level: {result.risk_level || "Unknown"}
+          Risk Level: {result.risk_level}
         </p>
       </div>
 
-      {/* 🧠 Explanation */}
+      {/* 🧠 EXPLANATION */}
       <div className="bg-white p-4 rounded shadow">
-        <p>{result.explanation || "No explanation available yet."}</p>
+        <p>{result.explanation}</p>
       </div>
 
-      {/* 💊 Recommendations */}
+      {/* 💡 RECOMMENDATIONS */}
       <div className="bg-white p-4 rounded shadow">
         <ul className="list-disc ml-4">
-          {result.recommendation?.length > 0 ? (
-            result.recommendation.map((rec, i) => (
-              <li key={i}>{rec}</li>
-            ))
-          ) : (
-            <li>No recommendations available</li>
-          )}
+          {result.recommendation?.map((rec, i) => (
+            <li key={i}>{rec}</li>
+          ))}
         </ul>
       </div>
 
