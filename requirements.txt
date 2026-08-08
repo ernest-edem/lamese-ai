@@ -1,0 +1,16 @@
+# Core data processing
+pandas
+numpy
+
+# Machine Learning
+scikit-learn
+
+# Configuration and environment management
+python-dotenv
+
+# Explainable AI
+shap
+
+# API framework
+fastapi
+uvicorn

@@ -1,0 +1,22 @@
+{
+    "application": {
+        "name": "LAMESE AI",
+        "version": "0.1.0",
+        "environment": "development"
+    },
+    "logging": {
+        "level": "INFO",
+        "directory": "logs",
+        "filename": "app.log"
+    },
+    "data": {
+        "dataset_path": "datasets/heart.csv",
+        "test_size": 0.2,
+        "random_state": 42
+    },
+    "model": {
+        "type": "RandomForestClassifier",
+        "n_estimators": 100,
+        "model_output_path": "artifacts/models/model.pkl"
+    }
+}
