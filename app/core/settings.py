@@ -41,6 +41,7 @@ class ModelSettings:
 
     type: str
     n_estimators: int
+    random_state: int
     model_output_path: str
 
 

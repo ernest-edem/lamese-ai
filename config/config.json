@@ -10,13 +10,14 @@
         "filename": "app.log"
     },
     "data": {
-        "dataset_path": "datasets/heart.csv",
+        "dataset_path": "datasets/heart_disease.csv",
         "test_size": 0.2,
         "random_state": 42
     },
     "model": {
-        "type": "RandomForestClassifier",
+        "type": "random_forest",
         "n_estimators": 100,
+        "random_state": 899,
         "model_output_path": "artifacts/models/model.pkl"
     }
 }

@@ -61,7 +61,7 @@ class DatasetLoader:
             )
 
         try:
-            dataframe = pd.read_csv(dataset_path)
+            df = pd.read_csv(dataset_path)
 
             logger.info(
                 "Dataset loaded successfully."
@@ -69,10 +69,10 @@ class DatasetLoader:
 
             logger.info(
                 "Dataset shape: %s",
-                dataframe.shape,
+                df.shape,
             )
 
-            return dataframe
+            return df
 
         except Exception as error:
             logger.exception(
