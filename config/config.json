@@ -17,7 +17,7 @@
     "model": {
         "type": "random_forest",
         "n_estimators": 100,
-        "random_state": 899,
-        "model_output_path": "artifacts/models/model.pkl"
+        "random_state": 42,
+        "model_output_path": "artifacts/model.pkl"
     }
 }

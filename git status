@@ -1,0 +1,205 @@
+[1mdiff --git a/app/__pycache__/application.cpython-311.pyc b/app/__pycache__/application.cpython-311.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3acb5a2[m
+Binary files /dev/null and b/app/__pycache__/application.cpython-311.pyc differ
+[1mdiff --git a/app/application.py b/app/application.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..7a5f3ab[m
+[1m--- /dev/null[m
+[1m+++ b/app/application.py[m
+[36m@@ -0,0 +1,163 @@[m
+[32m+[m[32m"""[m
+[32m+[m[32mLAMESE AI application orchestration.[m
+[32m+[m[32m"""[m
+[32m+[m
+[32m+[m[32mimport pandas as pd[m
+[32m+[m
+[32m+[m[32mfrom pathlib import Path[m
+[32m+[m
+[32m+[m[32mfrom app.core.config_loader import load_config[m
+[32m+[m[32mfrom app.core.logger import logger[m
+[32m+[m
+[32m+[m[32mfrom app.data.dataset_loader import DatasetLoader[m
+[32m+[m[32mfrom app.data.validator import validate_dataset[m
+[32m+[m
+[32m+[m[32mfrom app.data.preprocessor import ([m
+[32m+[m[32m    create_preprocessor,[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mfrom app.data.splitter import ([m
+[32m+[m[32m    feature_selection,[m
+[32m+[m[32m    split_data,[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m[32mfrom app.ml.model_factory import create_model[m
+[32m+[m
+[32m+[m[32mfrom app.ml.training import train[m
+[32m+[m
+[32m+[m[32mfrom app.ml.inference import ([m
+[32m+[m[32m    load_trained_model,[m
+[32m+[m[32m    predict_patient,[m
+[32m+[m[32m    predict_patient_probability,[m
+[32m+[m[32m)[m
+[32m+[m
+[32m+[m
+[32m+[m[32mclass Application:[m
+[32m+[m[32m    """[m
+[32m+[m[32m    Coordinate the LAMESE AI application workflow.[m
+[32m+[m[32m    """[m
+[32m+[m
+[32m+[m[32m    def run(self) -> None:[m
+[32m+[m[32m        """[m
+[32m+[m[32m        Start the LAMESE AI application.[m
+[32m+[m[32m        """[m
+[32m+[m
+[32m+[m[32m        logger.info([m
+[32m+[m[32m            "Starting LAMESE AI application..."[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        settings = load_config()[m
+[32m+[m
+[32m+[m[32m        if settings is None:[m
+[32m+[m[32m            logger.critical([m
+[32m+[m[32m                "Application startup failed due to configuration error."[m
+[32m+[m[32m            )[m
+[32m+[m[32m            return[m
+[32m+[m
+[32m+[m[32m        logger.info([m
+[32m+[m[32m            "LAMESE AI initialized successfully."[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        loader = DatasetLoader(settings)[m
+[32m+[m
+[32m+[m[32m        #=====================[m
+[32m+[m[32m        # Load Dataset[m
+[32m+[m[32m        #=====================[m
+[32m+[m[32m        df = loader.load()[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Validate Dataset[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        validate_dataset(df)[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Dataset Preprocessor[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        preprocessor = create_preprocessor()[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Transforming Categorical Features[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        #preprocessor = encoding(df)[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Feature Selection[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        X, y = feature_selection(df)[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Split Data[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        X_train, X_test, y_train, y_test = split_data([m
+[32m+[m[32m            X,[m
+[32m+[m[32m            y,[m
+[32m+[m[32m            #preprocessor,[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Create Model[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        model = create_model([m
+[32m+[m[32m            settings.model,[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Training Module[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        accuracy = train([m
+[32m+[m[32m            X_train,[m
+[32m+[m[32m            y_train,[m
+[32m+[m[32m            X_test,[m
+[32m+[m[32m            y_test,[m
+[32m+[m[32m            preprocessor,[m
+[32m+[m[32m            model,[m
+[32m+[m[32m            Path(settings.model.model_output_path),[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Inference Implementation[m
+[32m+[m[32m        # =====================[m
+[32m+[m
+[32m+[m[32m        new_patient = pd.DataFrame({[m
+[32m+[m[32m            "Age": [55],[m
+[32m+[m[32m            "Sex": ["M"],[m
+[32m+[m[32m            "ChestPainType": ["ATA"],[m
+[32m+[m[32m            "RestingBP": [140],[m
+[32m+[m[32m            "Cholesterol": [250],[m
+[32m+[m[32m            "FastingBS": [0],[m
+[32m+[m[32m            "RestingECG": ["Normal"],[m
+[32m+[m[32m            "MaxHR": [150],[m
+[32m+[m[32m            "ExerciseAngina": ["N"],[m
+[32m+[m[32m            "Oldpeak": [1.2],[m
+[32m+[m[32m            "ST_Slope": ["Up"],[m
+[32m+[m[32m        })[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Load Trained Model[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        pipeline = load_trained_model([m
+[32m+[m[32m            Path(settings.model.model_output_path)[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        # Prediction and Probability[m
+[32m+[m[32m        # =====================[m
+[32m+[m[32m        prediction = predict_patient([m
+[32m+[m[32m            pipeline,[m
+[32m+[m[32m            new_patient,[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        probability = predict_patient_probability([m
+[32m+[m[32m            pipeline,[m
+[32m+[m[32m            new_patient,[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        logger.info([m
+[32m+[m[32m            "Prediction for new patient: %s",[m
+[32m+[m[32m            prediction,[m
+[32m+[m[32m        )[m
+[32m+[m
+[32m+[m[32m        logger.info([m
+[32m+[m[32m            "Probability for new patient: %s",[m
+[32m+[m[32m            probability,[m
+[32m+[m[32m        )[m
+\ No newline at end of file[m
+[1mdiff --git a/app/core/__pycache__/settings.cpython-311.pyc b/app/core/__pycache__/settings.cpython-311.pyc[m
+[1mindex c9fcb3f..cb9f5b3 100644[m
+Binary files a/app/core/__pycache__/settings.cpython-311.pyc and b/app/core/__pycache__/settings.cpython-311.pyc differ
+[1mdiff --git a/app/core/settings.py b/app/core/settings.py[m
+[1mindex 1feb1e2..70874d0 100644[m
+[1m--- a/app/core/settings.py[m
+[1m+++ b/app/core/settings.py[m
+[36m@@ -45,6 +45,7 @@[m [mclass ModelSettings:[m
+     model_output_path: str[m
+ [m
+ [m
+[32m+[m
+ @dataclass(slots=True)[m
+ class Settings:[m
+     """Root application settings."""[m
+[1mdiff --git a/app/data/__pycache__/preprocessor.cpython-311.pyc b/app/data/__pycache__/preprocessor.cpython-311.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..66b72ab[m
+Binary files /dev/null and b/app/data/__pycache__/preprocessor.cpython-311.pyc differ
+[1mdiff --git a/app/data/__pycache__/splitter.cpython-311.pyc b/app/data/__pycache__/splitter.cpython-311.pyc[m
+[1mnew file mode 100644[m
+[1mindex 0000000..92b6958[m
+Binary files /dev/null and b/app/data/__pycache__/splitter.cpython-311.pyc differ
+[1mdiff --git a/app/data/preprocessor.py b/app/data/preprocessor.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..2e92bd7[m
+[1m--- /dev/null[m
+[1m+++ b/app/data/preprocessor.py[m
+[36m@@ -0,0 +1,45 @@[m
+[32m+[m[32mfrom sklearn.compose import ColumnTransformer[m
+[32m+[m[32mfrom sklearn.preprocessing import OneHotEn

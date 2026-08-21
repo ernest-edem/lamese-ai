@@ -45,6 +45,7 @@ class ModelSettings:
     model_output_path: str
 
 
+
 @dataclass(slots=True)
 class Settings:
     """Root application settings."""

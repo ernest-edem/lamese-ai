@@ -80,3 +80,1048 @@ TypeError: ModelSettings.__init__() got an unexpected keyword argument 'random_s
 2026-08-13 20:49:42,238 | app.core.logger | INFO | Dataset loaded successfully.
 2026-08-13 20:49:42,238 | app.core.logger | INFO | Dataset shape: (918, 12)
 2026-08-13 20:49:42,239 | app.core.logger | INFO | Dataset validation successful.
+2026-08-13 21:27:14,914 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-13 21:27:14,915 | app.core.logger | INFO | Loading application configuration...
+2026-08-13 21:27:14,916 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-13 21:27:14,916 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-13 21:27:14,917 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-13 21:27:14,925 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-13 21:27:14,925 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-13 21:27:14,925 | app.core.logger | INFO | Dataset validation successful.
+2026-08-13 21:27:14,947 | app.core.logger | INFO | Duplicated rows: 0      False
+1      False
+2      False
+3      False
+4      False
+       ...  
+913    False
+914    False
+915    False
+916    False
+917    False
+Length: 918, dtype: bool
+2026-08-13 21:38:42,153 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-13 21:38:42,153 | app.core.logger | INFO | Loading application configuration...
+2026-08-13 21:38:42,155 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-13 21:38:42,156 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-13 21:38:42,157 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-13 21:38:42,166 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-13 21:38:42,166 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-13 21:38:42,168 | app.core.logger | INFO | Dataset validation successful.
+2026-08-13 21:38:42,172 | app.core.logger | INFO | Duplicated rows: 0
+2026-08-13 21:38:42,176 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:28:30,675 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 08:28:30,677 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 08:28:30,700 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 08:28:30,701 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 08:28:30,702 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 08:28:30,739 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 08:28:30,740 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 08:28:30,741 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 08:28:30,751 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 08:28:30,755 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:28:30,757 | app.core.logger | INFO | Total missing values found: Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 08:29:25,417 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 08:29:25,419 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 08:29:25,421 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 08:29:25,422 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 08:29:25,422 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 08:29:25,431 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 08:29:25,431 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 08:29:25,432 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 08:29:25,435 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 08:29:25,439 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:29:25,442 | app.core.logger | INFO | Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 08:31:44,107 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 08:31:44,108 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 08:31:44,109 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 08:31:44,109 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 08:31:44,110 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 08:31:44,119 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 08:31:44,120 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 08:31:44,121 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 08:31:44,124 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 08:31:44,128 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:31:44,133 | app.core.logger | INFO | Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 08:31:44,137 | app.core.logger | INFO | Total missing values found: 0
+2026-08-14 08:32:13,104 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 08:32:13,104 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 08:32:13,105 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 08:32:13,106 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 08:32:13,106 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 08:32:13,112 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 08:32:13,113 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 08:32:13,114 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 08:32:13,117 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 08:32:13,120 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:32:13,122 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 08:32:13,123 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 08:36:29,149 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 08:36:29,149 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 08:36:29,150 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 08:36:29,151 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 08:36:29,151 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 08:36:29,157 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 08:36:29,158 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 08:36:29,158 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 08:36:29,162 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 08:36:29,164 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 08:36:29,166 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 08:36:29,168 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 08:36:29,169 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 16:56:49,040 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 16:56:49,042 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 16:56:49,061 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 16:56:49,062 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 16:56:49,063 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 16:56:49,108 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 16:56:49,110 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 16:56:49,110 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 16:56:49,123 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 16:56:49,126 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 16:56:49,129 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 16:56:49,134 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 16:56:49,136 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:05:51,981 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:05:51,982 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:05:51,983 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:05:51,984 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:05:51,985 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:05:52,004 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:05:52,005 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:05:52,005 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:05:52,023 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:05:52,028 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:05:52,032 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:05:52,034 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:05:52,035 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:36:11,441 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:36:11,441 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:36:11,442 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:36:11,442 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:36:11,444 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:36:11,461 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:36:11,462 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:36:11,462 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:36:11,474 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:36:11,477 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:36:11,480 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:36:11,482 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:36:11,484 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:39:59,220 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:39:59,222 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:39:59,223 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:39:59,224 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:39:59,224 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:39:59,249 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:39:59,249 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:39:59,250 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:39:59,262 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:39:59,266 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:39:59,268 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:39:59,271 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:39:59,271 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:41:16,001 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:41:16,001 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:41:16,002 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:41:16,003 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:41:16,003 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:41:16,013 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:41:16,013 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:41:16,015 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:41:16,020 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:41:16,024 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:41:16,027 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:41:16,030 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:41:16,031 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:46:18,064 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:46:18,066 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:46:18,068 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:46:18,069 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:46:18,070 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:46:18,094 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:46:18,095 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:46:18,095 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:46:18,110 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:46:18,115 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:46:18,120 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:46:18,125 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:46:18,126 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 17:47:25,309 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 17:47:25,309 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 17:47:25,314 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 17:47:25,318 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 17:47:25,319 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 17:47:25,331 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 17:47:25,332 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 17:47:25,333 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 17:47:25,342 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 17:47:25,346 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 17:47:25,353 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 17:47:25,357 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 17:47:25,357 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 18:23:21,505 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 18:23:21,507 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 18:23:21,509 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 18:23:21,509 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 18:23:21,510 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 18:23:21,527 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 18:23:21,527 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 18:23:21,528 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 18:23:21,540 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 18:23:21,543 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 18:23:21,547 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 18:23:21,548 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 18:23:21,549 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 18:27:08,772 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 18:27:08,772 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 18:27:08,773 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 18:27:08,773 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 18:27:08,774 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 18:27:08,784 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 18:27:08,784 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 18:27:08,786 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 18:27:08,789 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 18:27:08,793 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 18:27:08,795 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 18:27:08,797 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 18:27:08,798 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 19:10:02,093 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 19:10:02,094 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 19:10:02,096 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 19:10:02,097 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 19:10:02,098 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 19:10:02,119 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 19:10:02,120 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 19:10:02,121 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 19:10:02,134 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 19:10:02,138 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 19:10:02,141 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 19:10:02,144 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 19:10:02,145 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 19:11:28,810 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 19:11:28,810 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 19:11:28,811 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 19:11:28,812 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 19:11:28,812 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 19:11:28,818 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 19:11:28,819 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 19:11:28,820 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 19:11:28,823 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 19:11:28,826 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 19:11:28,830 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 19:11:28,834 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 19:11:28,835 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 21:21:27,984 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 21:21:27,985 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 21:21:27,986 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 21:21:27,986 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 21:21:27,988 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 21:21:28,011 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 21:21:28,011 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 21:21:28,013 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 21:21:28,023 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 21:21:28,026 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 21:21:28,028 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 21:21:28,031 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 21:21:28,031 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 21:23:29,716 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 21:23:29,717 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 21:23:29,718 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 21:23:29,718 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 21:23:29,718 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 21:23:29,724 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 21:23:29,725 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 21:23:29,726 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 21:23:29,730 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 21:23:29,733 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 21:23:29,736 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 21:23:29,738 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 21:23:29,739 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 21:26:08,889 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 21:26:08,891 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 21:26:08,891 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 21:26:08,892 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 21:26:08,893 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 21:26:08,904 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 21:26:08,904 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 21:26:08,906 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 21:26:08,909 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 21:26:08,911 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 21:26:08,914 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 21:26:08,916 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 21:26:08,916 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-14 21:30:16,369 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-14 21:30:16,370 | app.core.logger | INFO | Loading application configuration...
+2026-08-14 21:30:16,371 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-14 21:30:16,371 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-14 21:30:16,372 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-14 21:30:16,379 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-14 21:30:16,379 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-14 21:30:16,380 | app.core.logger | INFO | Dataset validation successful.
+2026-08-14 21:30:16,383 | app.core.logger | INFO | Duplicate rows found: 0
+2026-08-14 21:30:16,386 | app.core.logger | INFO | Dataset shape after removing duplicates: (918, 12)
+2026-08-14 21:30:16,388 | app.core.logger | INFO | 
+Age               0
+Sex               0
+ChestPainType     0
+RestingBP         0
+Cholesterol       0
+FastingBS         0
+RestingECG        0
+MaxHR             0
+ExerciseAngina    0
+Oldpeak           0
+ST_Slope          0
+HeartDisease      0
+dtype: int64
+2026-08-14 21:30:16,390 | app.core.logger | INFO | 
+Total missing values found: 0
+2026-08-14 21:30:16,391 | app.core.logger | INFO | Dataset data types:
+Age                 int64
+Sex                   str
+ChestPainType         str
+RestingBP           int64
+Cholesterol         int64
+FastingBS           int64
+RestingECG            str
+MaxHR               int64
+ExerciseAngina        str
+Oldpeak           float64
+ST_Slope              str
+HeartDisease        int64
+dtype: object
+2026-08-15 12:36:01,697 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 12:36:01,698 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 12:36:01,704 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 12:36:01,705 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 12:36:01,706 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 12:36:01,760 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 12:36:01,762 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 12:36:01,763 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 12:36:02,300 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 13:24:43,249 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 13:24:43,250 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 13:24:43,253 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 13:24:43,254 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 13:24:43,254 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 13:24:43,277 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 13:24:43,278 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 13:24:43,279 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 13:24:43,874 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 13:24:43,915 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 13:28:35,049 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 13:28:35,049 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 13:28:35,051 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 13:28:35,052 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 13:28:35,052 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 13:28:35,065 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 13:28:35,066 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 13:28:35,067 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 13:28:35,676 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 13:28:35,791 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 13:28:35,836 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 16:59:17,004 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 16:59:17,005 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 16:59:17,024 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 16:59:17,024 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 16:59:17,025 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 16:59:17,064 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 16:59:17,064 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 16:59:17,065 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 16:59:17,570 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 16:59:17,630 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 16:59:17,657 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 17:19:52,670 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:19:52,670 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:19:52,671 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:19:52,672 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:19:52,672 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:19:52,678 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:19:52,679 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:19:52,679 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:19:52,990 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:19:53,047 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:19:53,094 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 17:20:58,189 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:20:58,189 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:20:58,190 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:20:58,190 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:20:58,191 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:20:58,197 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:20:58,197 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:20:58,198 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:20:58,518 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:20:58,581 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:20:58,623 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 17:30:19,691 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:30:19,691 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:30:19,692 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:30:19,692 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:30:19,694 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:30:19,700 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:30:19,700 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:30:19,701 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:30:20,036 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:30:20,096 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:30:20,153 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 17:36:25,738 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:36:25,739 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:36:25,740 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:36:25,740 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:36:25,741 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:36:25,746 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:36:25,747 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:36:25,748 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:36:26,066 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:36:26,129 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:37:53,571 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:37:53,571 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:37:53,572 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:37:53,573 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:37:53,573 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:37:53,579 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:37:53,579 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:37:53,580 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:37:53,911 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:37:53,972 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:38:30,545 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 17:38:30,545 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 17:38:30,546 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 17:38:30,547 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 17:38:30,547 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 17:38:30,553 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 17:38:30,554 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 17:38:30,554 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 17:38:30,873 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 17:38:30,927 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 17:38:30,991 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-15 18:23:09,213 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 18:23:09,214 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 18:23:09,215 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 18:23:09,216 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 18:23:09,217 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 18:23:09,236 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 18:23:09,237 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 18:23:09,237 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 18:23:09,612 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 18:23:09,668 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 18:28:43,985 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-15 18:28:43,987 | app.core.logger | INFO | Loading application configuration...
+2026-08-15 18:28:43,988 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-15 18:28:43,989 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-15 18:28:43,989 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-15 18:28:44,000 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-15 18:28:44,001 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-15 18:28:44,002 | app.core.logger | INFO | Dataset validation successful.
+2026-08-15 18:28:44,318 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-15 18:28:44,381 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-15 18:28:44,392 | app.core.logger | ERROR | Prediction failed.
+Traceback (most recent call last):
+  File "D:\projects\lamese-ai\app\ml\predictor.py", line 24, in predict
+    prediction = pipeline.predict(new_patient)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ML\.venv\Lib\site-packages\sklearn\pipeline.py", line 796, in predict
+    Xt = transform.transform(Xt)
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ML\.venv\Lib\site-packages\sklearn\utils\_set_output.py", line 319, in wrapped
+    data_to_wrap = f(self, X, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ML\.venv\Lib\site-packages\sklearn\compose\_column_transformer.py", line 1068, in transform
+    raise ValueError(f"columns are missing: {diff}")
+ValueError: columns are missing: {'MaxHR'}
+2026-08-16 19:59:55,905 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 19:59:55,907 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 19:59:55,927 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 19:59:55,929 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 19:59:55,929 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 19:59:55,971 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 19:59:55,971 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 19:59:55,972 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 19:59:56,569 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-16 19:59:56,631 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-16 19:59:56,702 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-16 20:24:22,204 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 20:24:22,206 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 20:24:22,211 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 20:24:22,212 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 20:26:57,590 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 20:26:57,591 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 20:26:57,593 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 20:26:57,594 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 20:26:57,595 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 20:26:57,618 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 20:26:57,619 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 20:26:57,620 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 21:45:02,756 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 21:45:02,757 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 21:45:02,758 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 21:45:02,759 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 21:45:02,759 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 21:45:02,779 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 21:45:02,779 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 21:45:02,780 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 21:49:28,490 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 21:49:28,490 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 21:49:28,493 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 21:49:28,494 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 21:49:28,495 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 21:49:28,517 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 21:49:28,517 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 21:49:28,518 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 21:52:24,663 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 21:52:24,664 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 21:52:24,664 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 21:52:24,665 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 21:52:24,665 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 21:52:24,673 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 21:52:24,674 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 21:52:24,674 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 22:19:24,798 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 22:19:24,800 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 22:19:24,801 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 22:19:24,803 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 22:19:24,803 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 22:19:24,817 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 22:19:24,818 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 22:19:24,818 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 22:19:25,245 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-16 22:19:59,519 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 22:19:59,519 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 22:19:59,520 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 22:19:59,521 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 22:19:59,521 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 22:19:59,527 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 22:19:59,528 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 22:19:59,529 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 22:19:59,907 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-16 22:33:37,245 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-16 22:33:37,246 | app.core.logger | INFO | Loading application configuration...
+2026-08-16 22:33:37,247 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-16 22:33:37,247 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-16 22:33:37,249 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-16 22:33:37,271 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-16 22:33:37,272 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-16 22:33:37,273 | app.core.logger | INFO | Dataset validation successful.
+2026-08-16 22:33:37,788 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-16 22:33:37,842 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-18 18:21:30,527 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-18 18:21:30,529 | app.core.logger | INFO | Loading application configuration...
+2026-08-18 18:21:30,547 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-18 18:21:30,548 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-18 18:21:30,549 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-18 18:21:30,596 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-18 18:21:30,596 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-18 18:21:30,598 | app.core.logger | INFO | Dataset validation successful.
+2026-08-18 18:21:31,222 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-18 18:21:31,251 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-18 18:21:31,323 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-18 18:21:31,359 | app.core.logger | INFO | Prediction for new patient: [0]
+2026-08-18 18:21:31,361 | app.core.logger | INFO | Probability for new patient: [[0.95 0.05]]
+2026-08-18 18:25:23,979 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-18 18:25:23,982 | app.core.logger | INFO | Loading application configuration...
+2026-08-18 18:25:23,984 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-18 18:25:23,986 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-18 18:25:23,986 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-18 18:25:24,006 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-18 18:25:24,007 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-18 18:25:24,007 | app.core.logger | INFO | Dataset validation successful.
+2026-08-18 18:25:24,522 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-18 18:25:24,550 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-18 18:25:24,624 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-18 18:25:24,669 | app.core.logger | INFO | Prediction for new patient: [0]
+2026-08-18 18:25:24,670 | app.core.logger | INFO | Probability for new patient: [[0.95 0.05]]
+2026-08-18 18:27:35,201 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-18 18:27:35,201 | app.core.logger | INFO | Loading application configuration...
+2026-08-18 18:27:35,203 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-18 18:27:35,205 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-18 18:27:35,205 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-18 18:27:35,214 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-18 18:27:35,216 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-18 18:27:35,217 | app.core.logger | INFO | Dataset validation successful.
+2026-08-18 18:27:35,745 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-18 18:27:35,771 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-18 18:27:35,851 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-18 18:27:35,898 | app.core.logger | INFO | Prediction for new patient: [0]
+2026-08-18 18:27:35,899 | app.core.logger | INFO | Probability for new patient: [[0.95 0.05]]
+2026-08-18 19:07:51,400 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-18 19:07:51,401 | app.core.logger | INFO | Loading application configuration...
+2026-08-18 19:07:51,403 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-18 19:07:51,403 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-18 19:07:51,404 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-18 19:07:51,428 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-18 19:07:51,429 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-18 19:07:51,429 | app.core.logger | INFO | Dataset validation successful.
+2026-08-18 19:07:51,817 | app.core.logger | INFO | Accuracy: 0.91
+2026-08-18 19:07:51,888 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-18 19:07:51,984 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-18 19:07:52,023 | app.core.logger | INFO | Prediction for new patient: [0]
+2026-08-18 19:07:52,025 | app.core.logger | INFO | Probability for new patient: [[0.95 0.05]]
+2026-08-21 18:49:53,703 | app.core.logger | INFO | Starting LAMESE AI application...
+2026-08-21 18:49:53,704 | app.core.logger | INFO | Loading application configuration...
+2026-08-21 18:49:53,705 | app.core.logger | INFO | Configuration loaded successfully.
+2026-08-21 18:49:53,706 | app.core.logger | INFO | LAMESE AI initialized successfully.
+2026-08-21 18:49:53,706 | app.core.logger | INFO | Loading dataset from 'datasets\heart_disease.csv'.
+2026-08-21 18:49:53,743 | app.core.logger | INFO | Dataset loaded successfully.
+2026-08-21 18:49:53,743 | app.core.logger | INFO | Dataset shape: (918, 12)
+2026-08-21 18:49:53,744 | app.core.logger | INFO | Dataset validation successful.
+2026-08-21 18:49:54,212 | app.core.logger | INFO | Accuracy: 0.90
+2026-08-21 18:49:54,262 | app.core.logger | INFO | Trained model saved to 'artifacts\model.pkl'.
+2026-08-21 18:49:54,322 | app.core.logger | INFO | Model loaded successfully from 'artifacts\model.pkl'.
+2026-08-21 18:49:54,351 | app.core.logger | INFO | Prediction for new patient: [0]
+2026-08-21 18:49:54,352 | app.core.logger | INFO | Probability for new patient: [[0.92 0.08]]
