@@ -31,6 +31,21 @@ from app.ml.inference import (
     predict_patient_probability,
 )
 
+from app.ml.evaluator import (
+    evaluate_pipeline,
+    evaluate_thresholds,
+)
+
+from app.ml.threshold import (
+    select_threshold,
+    predict_with_threshold,
+)
+
+from app.ml.pipeline import create_pipeline
+from app.ml.cross_validation import cross_validate_model
+
+from app.ml.tuner import tune_model
+
 
 class Application:
     """
@@ -88,10 +103,9 @@ class Application:
         # =====================
         # Split Data
         # =====================
-        X_train, X_test, y_train, y_test = split_data(
+        X_train, X_validation, X_test, y_train, y_validation, y_test = split_data(
             X,
             y,
-            #preprocessor,
         )
 
         # =====================
@@ -102,16 +116,70 @@ class Application:
         )
 
         # =====================
+        # Create ML Pipeline
+        # =====================
+        pipeline = create_pipeline(
+            preprocessor,
+            model,
+        )
+
+        # =====================
+        # Hyperparameter Tuning
+        # =====================
+        pipeline = tune_model(
+            pipeline,
+            X_train,
+            y_train,
+        )
+
+        # =====================
+        # Cross Validation Model
+        # =====================
+        cv_mean, cv_std = cross_validate_model(
+            pipeline,
+            X_train,
+            y_train,
+            folds=5,
+        )
+
+        # =====================
         # Training Module
         # =====================
         accuracy = train(
+            pipeline,
             X_train,
             y_train,
             X_test,
             y_test,
-            preprocessor,
-            model,
             Path(settings.model.model_output_path),
+        )
+
+        # =====================
+        # Model Evaluation
+        # =====================
+        evaluate_thresholds(
+            pipeline,
+            X_validation,
+            y_validation,
+        )
+
+        # =====================
+        # Threshold Selection
+        # =====================
+        selected_threshold = select_threshold(
+            pipeline,
+            X_validation,
+            y_validation,
+            settings.model.threshold.minimum_recall,
+            settings.model.threshold.minimum,
+            settings.model.threshold.maximum,
+            settings.model.threshold.step,
+        )
+
+
+        logger.info(
+            "Selected threshold: %.2f",
+            selected_threshold,
         )
 
         # =====================
@@ -137,6 +205,17 @@ class Application:
         # =====================
         pipeline = load_trained_model(
             Path(settings.model.model_output_path)
+        )
+
+        threshold_prediction = predict_with_threshold(
+            pipeline,
+            new_patient,
+            0.60,
+        )
+
+        logger.info(
+            "Threshold prediction for new patient: %d",
+            threshold_prediction,
         )
 
         # =====================

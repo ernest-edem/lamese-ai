@@ -28,11 +28,14 @@ def split_data(
 ) -> tuple[
     pd.DataFrame,
     pd.DataFrame,
+    pd.DataFrame,
+    pd.Series,
     pd.Series,
     pd.Series,
 ]:
     """
-    Split features and target into training and testing sets.
+    Split features and target into training,
+    validation, and testing sets.
 
     Args:
         X: Selected features.
@@ -41,17 +44,34 @@ def split_data(
     Returns:
         tuple:
             X_train: Training features.
+            X_validation: Validation features.
             X_test: Testing features.
             y_train: Training target.
+            y_validation: Validation target.
             y_test: Testing target.
     """
 
-    X_train, X_test, y_train, y_test = train_test_split(
+    X_train, X_temp, y_train, y_temp = train_test_split(
         X,
         y,
-        test_size=0.2,
+        test_size=0.30,
         random_state=42,
         stratify=y,
     )
 
-    return X_train, X_test, y_train, y_test
+    X_validation, X_test, y_validation, y_test = train_test_split(
+        X_temp,
+        y_temp,
+        test_size=0.50,
+        random_state=42,
+        stratify=y_temp,
+    )
+
+    return (
+        X_train,
+        X_validation,
+        X_test,
+        y_train,
+        y_validation,
+        y_test,
+    )

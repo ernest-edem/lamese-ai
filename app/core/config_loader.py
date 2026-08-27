@@ -13,6 +13,7 @@ from app.core.settings import (
     ApplicationSettings,
     DataSettings,
     LoggingSettings,
+    ThresholdSettings,
     ModelSettings,
     Settings,
 )
@@ -57,8 +58,19 @@ def load_config(config_path: Path = DEFAULT_CONFIG_PATH,) -> Settings | None:
             **config["data"]
         )
 
+        threshold = ThresholdSettings(
+            **config["model"]["threshold"]
+        )
+
+        model_config = {
+            key: value
+            for key, value in config["model"].items()
+            if key != "threshold"
+        }
+
         model = ModelSettings(
-            **config["model"]
+            **model_config,
+            threshold=threshold,
         )
 
         settings = Settings(

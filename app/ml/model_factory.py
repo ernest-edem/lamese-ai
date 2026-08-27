@@ -9,6 +9,9 @@ from app.ml.protocol import ModelProtocol
 from app.core.settings import ModelSettings
 
 
+
+from app.core.logger import logger
+
 def create_model(
     settings: ModelSettings,
 ) -> ModelProtocol:
@@ -22,6 +25,13 @@ def create_model(
     Raises:
         ValueError: If the model type is unsupported.
     """
+    logger.info(
+        "Creating model: type=%s, n_estimators=%s, random_state=%s",
+        settings.type,
+        settings.n_estimators,
+        settings.random_state,
+    )
+
 
     if not settings.type:
         raise ValueError("Configured model not found")
@@ -36,6 +46,13 @@ def create_model(
         return LogisticRegression(
             max_iter=1000,
         )
+
+    logger.info(
+        "Creating model: type=%s, n_estimators=%s, random_state=%s",
+        settings.type,
+        settings.n_estimators,
+        settings.random_state,
+    )
 
     raise ValueError(
         f"Unsupported model type: {settings.type}"
