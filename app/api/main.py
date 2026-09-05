@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config_loader import load_config
 from app.ml.inference import (
@@ -34,14 +35,27 @@ app = FastAPI(
 
 
 # ==========================================================
+# CORS
+# ==========================================================
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5174",
+        "http://127.0.0.1:5174",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+# ==========================================================
 # HEALTH CHECK
 # ==========================================================
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
-    """
-    Check whether the API is running.
-    """
     settings = load_config()
 
     if settings is None:
@@ -65,10 +79,6 @@ def health_check() -> dict[str, str]:
     response_model=PredictionResponse,
 )
 def predict(patient: PatientInput) -> PredictionResponse:
-    """
-    Generate a heart disease prediction for a patient.
-    """
-
     settings = load_config()
 
     if settings is None:
@@ -94,32 +104,20 @@ def predict(patient: PatientInput) -> PredictionResponse:
             [patient.model_dump()]
         )
 
-        # --------------------------------------------------
-        # Standard model prediction
-        # --------------------------------------------------
-
         prediction = predict_patient(
             pipeline,
             patient_data,
         )
-
-        # --------------------------------------------------
-        # Prediction probability
-        # --------------------------------------------------
 
         probability = predict_patient_probability(
             pipeline,
             patient_data,
         )
 
-        # Probability of HeartDisease = 1
         heart_disease_probability = float(
             probability[0][1]
         )
 
-        # --------------------------------------------------
-        # Threshold prediction
-        # --------------------------------------------------
         selected_threshold = settings.model.threshold.selected
 
         threshold_prediction = predict_with_threshold(
@@ -127,10 +125,6 @@ def predict(patient: PatientInput) -> PredictionResponse:
             patient_data,
             selected_threshold,
         )
-
-        # --------------------------------------------------
-        # SHAP explanation
-        # --------------------------------------------------
 
         explanation = explain_prediction(
             pipeline,
