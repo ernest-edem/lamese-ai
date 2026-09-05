@@ -6,9 +6,8 @@ import {
   Loader2,
   ShieldCheck,
 } from "lucide-react";
+import { predictPatient } from "./services/predictionService";
 import "./App.css";
-
-const API_URL = "http://localhost:8000";
 
 const initialForm = {
   Age: "",
@@ -47,33 +46,19 @@ function App() {
     setResult(null);
 
     try {
-      const response = await fetch(`${API_URL}/predict`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Age: Number(form.Age),
-          Sex: form.Sex,
-          ChestPainType: form.ChestPainType,
-          RestingBP: Number(form.RestingBP),
-          Cholesterol: Number(form.Cholesterol),
-          FastingBS: Number(form.FastingBS),
-          RestingECG: form.RestingECG,
-          MaxHR: Number(form.MaxHR),
-          ExerciseAngina: form.ExerciseAngina,
-          Oldpeak: Number(form.Oldpeak),
-          ST_Slope: form.ST_Slope,
-        }),
+      const data = await predictPatient({
+        Age: Number(form.Age),
+        Sex: form.Sex,
+        ChestPainType: form.ChestPainType,
+        RestingBP: Number(form.RestingBP),
+        Cholesterol: Number(form.Cholesterol),
+        FastingBS: Number(form.FastingBS),
+        RestingECG: form.RestingECG,
+        MaxHR: Number(form.MaxHR),
+        ExerciseAngina: form.ExerciseAngina,
+        Oldpeak: Number(form.Oldpeak),
+        ST_Slope: form.ST_Slope,
       });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data.detail || "Prediction request failed."
-        );
-      }
 
       setResult(data);
     } catch (requestError) {
