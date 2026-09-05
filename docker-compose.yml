@@ -1,0 +1,10 @@
+services:
+  lamese-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lamese-ai:0.1.0
+    container_name: lamese-ai
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
