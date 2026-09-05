@@ -5,6 +5,7 @@ Tests for the LAMESE AI FastAPI application.
 from fastapi.testclient import TestClient
 
 from app.api.main import app
+from app.core.config_loader import load_config
 
 
 client = TestClient(app)
@@ -81,10 +82,44 @@ def test_prediction_values():
 
     data = response.json()
 
+    settings = load_config()
+
+    assert settings is not None
+
     assert data["prediction"] in [0, 1]
     assert 0.0 <= data["probability"] <= 1.0
     assert data["threshold_prediction"] in [0, 1]
-    assert data["threshold"] == 0.62
+    assert data["threshold"] == settings.model.threshold.selected
+
+
+def test_prediction_uses_configured_threshold(monkeypatch):
+    """Verify that the API uses the configured selected threshold."""
+
+    settings = load_config()
+
+    assert settings is not None
+
+    monkeypatch.setattr(
+        settings.model.threshold,
+        "selected",
+        0.65,
+    )
+
+    monkeypatch.setattr(
+        "app.api.main.load_config",
+        lambda: settings,
+    )
+
+    response = client.post(
+        "/predict",
+        json=VALID_PATIENT,
+    )
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["threshold"] == 0.65
 
 
 def test_prediction_explanation():
