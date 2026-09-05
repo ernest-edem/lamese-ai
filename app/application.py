@@ -2,29 +2,20 @@
 LAMESE AI application orchestration.
 """
 
-import pandas as pd
-
 from pathlib import Path
+
+import pandas as pd
 
 from app.core.config_loader import load_config
 from app.core.logger import logger
 
 from app.data.dataset_loader import DatasetLoader
 from app.data.validator import validate_dataset
-
-from app.data.preprocessor import (
-    create_preprocessor,
-)
-
-from app.data.splitter import (
-    feature_selection,
-    split_data,
-)
+from app.data.preprocessor import create_preprocessor
+from app.data.splitter import feature_selection, split_data
 
 from app.ml.model_factory import create_model
-
 from app.ml.training import train
-
 from app.ml.inference import (
     load_trained_model,
     predict_patient,
@@ -43,8 +34,11 @@ from app.ml.threshold import (
 
 from app.ml.pipeline import create_pipeline
 from app.ml.cross_validation import cross_validate_model
-
 from app.ml.tuner import tune_model
+
+from app.ml.explainability.shap_explainer import (
+    explain_prediction,
+)
 
 
 class Application:
@@ -75,9 +69,9 @@ class Application:
 
         loader = DatasetLoader(settings)
 
-        #=====================
+        # =====================
         # Load Dataset
-        #=====================
+        # =====================
         df = loader.load()
 
         # =====================
@@ -91,11 +85,6 @@ class Application:
         preprocessor = create_preprocessor()
 
         # =====================
-        # Transforming Categorical Features
-        # =====================
-        #preprocessor = encoding(df)
-
-        # =====================
         # Feature Selection
         # =====================
         X, y = feature_selection(df)
@@ -103,7 +92,14 @@ class Application:
         # =====================
         # Split Data
         # =====================
-        X_train, X_validation, X_test, y_train, y_validation, y_test = split_data(
+        (
+            X_train,
+            X_validation,
+            X_test,
+            y_train,
+            y_validation,
+            y_test,
+        ) = split_data(
             X,
             y,
         )
@@ -142,6 +138,16 @@ class Application:
             folds=5,
         )
 
+        logger.info(
+            "Cross-validation mean: %.4f",
+            cv_mean,
+        )
+
+        logger.info(
+            "Cross-validation standard deviation: %.4f",
+            cv_std,
+        )
+
         # =====================
         # Training Module
         # =====================
@@ -152,6 +158,11 @@ class Application:
             X_test,
             y_test,
             Path(settings.model.model_output_path),
+        )
+
+        logger.info(
+            "Training accuracy: %.4f",
+            accuracy,
         )
 
         # =====================
@@ -176,7 +187,6 @@ class Application:
             settings.model.threshold.step,
         )
 
-
         logger.info(
             "Selected threshold: %.2f",
             selected_threshold,
@@ -185,20 +195,21 @@ class Application:
         # =====================
         # Inference Implementation
         # =====================
-
-        new_patient = pd.DataFrame({
-            "Age": [55],
-            "Sex": ["M"],
-            "ChestPainType": ["ATA"],
-            "RestingBP": [140],
-            "Cholesterol": [250],
-            "FastingBS": [0],
-            "RestingECG": ["Normal"],
-            "MaxHR": [150],
-            "ExerciseAngina": ["N"],
-            "Oldpeak": [1.2],
-            "ST_Slope": ["Up"],
-        })
+        new_patient = pd.DataFrame(
+            {
+                "Age": [55],
+                "Sex": ["M"],
+                "ChestPainType": ["ATA"],
+                "RestingBP": [140],
+                "Cholesterol": [250],
+                "FastingBS": [0],
+                "RestingECG": ["Normal"],
+                "MaxHR": [150],
+                "ExerciseAngina": ["N"],
+                "Oldpeak": [1.2],
+                "ST_Slope": ["Up"],
+            }
+        )
 
         # =====================
         # Load Trained Model
@@ -207,10 +218,13 @@ class Application:
             Path(settings.model.model_output_path)
         )
 
+        # =====================
+        # Threshold Prediction
+        # =====================
         threshold_prediction = predict_with_threshold(
             pipeline,
             new_patient,
-            0.60,
+            selected_threshold,
         )
 
         logger.info(
@@ -240,3 +254,22 @@ class Application:
             "Probability for new patient: %s",
             probability,
         )
+
+        # =====================
+        # SHAP Explainability
+        # =====================
+        explanation = explain_prediction(
+            pipeline,
+            new_patient,
+        )
+
+        logger.info(
+            "SHAP explanation generated successfully."
+        )
+
+        for feature, contribution in explanation.items():
+            logger.info(
+                "SHAP contribution - %s: %+.6f",
+                feature,
+                contribution,
+            )

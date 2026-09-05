@@ -14,3 +14,7 @@ shap
 # API framework
 fastapi
 uvicorn
+
+# Testing
+pytest
+httpx2
