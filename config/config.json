@@ -24,7 +24,8 @@
         "minimum_recall": 0.90,
         "minimum": 0.30,
         "maximum": 0.70,
-        "step": 0.01
+        "step": 0.01,
+        "selected": 0.62
     }
 }
 }

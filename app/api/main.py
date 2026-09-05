@@ -120,7 +120,7 @@ def predict(patient: PatientInput) -> PredictionResponse:
         # --------------------------------------------------
         # Threshold prediction
         # --------------------------------------------------
-        selected_threshold = 0.62
+        selected_threshold = settings.model.threshold.selected
 
         threshold_prediction = predict_with_threshold(
             pipeline,

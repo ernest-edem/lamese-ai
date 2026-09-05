@@ -43,6 +43,7 @@ class ThresholdSettings:
     minimum: float
     maximum: float
     step: float
+    selected: float
 
     def __post_init__(self) -> None:
         """Validate threshold configuration."""
@@ -70,6 +71,11 @@ class ThresholdSettings:
         if self.step <= 0.0:
             raise ValueError(
                 "threshold step must be greater than 0."
+            )
+
+        if not 0.0 <= self.selected <= 1.0:
+            raise ValueError(
+                "selected threshold must be between 0.0 and 1.0."
             )
 
 
