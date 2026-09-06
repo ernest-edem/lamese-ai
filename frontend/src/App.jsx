@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Activity,
   AlertCircle,
@@ -7,6 +7,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { predictPatient } from "./services/predictionService";
+import { checkApiHealth } from "./services/healthService";
 
 const initialForm = {
   Age: "",
@@ -27,6 +28,31 @@ function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [apiStatus, setApiStatus] = useState("checking");
+
+  useEffect(() => {
+    let mounted = true;
+
+    const checkHealth = async () => {
+      try {
+        await checkApiHealth();
+
+        if (mounted) {
+          setApiStatus("available");
+        }
+      } catch {
+        if (mounted) {
+          setApiStatus("unavailable");
+        }
+      }
+    };
+
+    checkHealth();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -60,11 +86,24 @@ function App() {
       });
 
       setResult(data);
+
+      // Refresh service status after a successful prediction request.
+      setApiStatus("available");
     } catch (requestError) {
       setError(
         requestError.message ||
           "Unable to connect to the prediction service."
       );
+
+      // A failed prediction request may indicate that the API is
+      // unavailable. Refresh the health status without changing
+      // the existing prediction workflow.
+      try {
+        await checkApiHealth();
+        setApiStatus("available");
+      } catch {
+        setApiStatus("unavailable");
+      }
     } finally {
       setLoading(false);
     }
@@ -75,6 +114,24 @@ function App() {
     setResult(null);
     setError("");
   };
+
+  const serviceStatus = {
+    checking: {
+      label: "Checking prediction API",
+      dotClass: "bg-amber-400",
+      textClass: "text-slate-600",
+    },
+    available: {
+      label: "Prediction API available",
+      dotClass: "bg-emerald-500",
+      textClass: "text-emerald-700",
+    },
+    unavailable: {
+      label: "Prediction API unavailable",
+      dotClass: "bg-red-500",
+      textClass: "text-red-700",
+    },
+  }[apiStatus];
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -96,9 +153,17 @@ function App() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-            Prediction service
+          <div
+            className={`flex items-center gap-2 text-sm font-medium ${serviceStatus.textClass}`}
+            aria-live="polite"
+          >
+            <span
+              className={`h-2.5 w-2.5 rounded-full ${serviceStatus.dotClass} ${
+                apiStatus === "checking" ? "animate-pulse" : ""
+              }`}
+            />
+
+            {serviceStatus.label}
           </div>
         </div>
       </header>
