@@ -30,7 +30,10 @@ export function AuthProvider({ children }) {
           setSession(currentSession);
         }
       } catch (error) {
-        console.error("Failed to restore authentication session:", error);
+        console.error(
+          "Failed to restore authentication session:",
+          error,
+        );
 
         if (mounted) {
           setSession(null);
@@ -59,7 +62,10 @@ export function AuthProvider({ children }) {
   }, []);
 
   async function signIn(email, password) {
-    const authenticatedSession = await login(email, password);
+    const authenticatedSession = await login(
+      email,
+      password,
+    );
 
     setSession(authenticatedSession.session);
 

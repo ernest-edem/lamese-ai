@@ -2,26 +2,28 @@ import { useEffect, useState } from "react";
 import {
   Activity,
   BarChart3,
+  CheckCircle2,
   HeartPulse,
   Loader2,
-  LockKeyhole,
-  LogIn,
   LogOut,
-  ShieldCheck,
-  User,
+  WifiOff,
 } from "lucide-react";
 
+import Login from "./pages/Login";
+import ResetPassword from "./pages/ResetPassword";
 import PatientInput from "./pages/PatientInput";
 import ExplainabilityDashboard from "./pages/ExplainabilityDashboard";
 
 import { useAuth } from "./context/AuthContext";
 import { checkApiHealth } from "./services/healthService";
+import { signInWithGoogle } from "./services/authService";
 
 const PAGES = {
   SPLASH: "splash",
   LOGIN: "login",
   PATIENT_INPUT: "patient-input",
   DASHBOARD: "dashboard",
+  RESET_PASSWORD: "reset-password",
 };
 
 const SPLASH_DURATION = 1800;
@@ -35,10 +37,18 @@ export default function App() {
     signOut,
   } = useAuth();
 
-  const [currentPage, setCurrentPage] = useState(PAGES.SPLASH);
+  const [currentPage, setCurrentPage] = useState(
+    PAGES.SPLASH,
+  );
   const [result, setResult] = useState(null);
   const [apiStatus, setApiStatus] = useState("checking");
 
+  const isPasswordResetRoute =
+    window.location.pathname === "/reset-password";
+
+  // ==========================================================
+  // API HEALTH CHECK
+  // ==========================================================
   useEffect(() => {
     let mounted = true;
 
@@ -63,8 +73,20 @@ export default function App() {
     };
   }, []);
 
+  // ==========================================================
+  // PASSWORD RESET ROUTING
+  // ==========================================================
   useEffect(() => {
-    if (authLoading) {
+    if (isPasswordResetRoute) {
+      setCurrentPage(PAGES.RESET_PASSWORD);
+    }
+  }, [isPasswordResetRoute]);
+
+  // ==========================================================
+  // SPLASH / INITIAL AUTH ROUTING
+  // ==========================================================
+  useEffect(() => {
+    if (authLoading || isPasswordResetRoute) {
       return undefined;
     }
 
@@ -79,9 +101,20 @@ export default function App() {
     return () => {
       window.clearTimeout(timer);
     };
-  }, [authLoading, isAuthenticated]);
+  }, [
+    authLoading,
+    isAuthenticated,
+    isPasswordResetRoute,
+  ]);
 
+  // ==========================================================
+  // AUTHENTICATION STATE GUARD
+  // ==========================================================
   useEffect(() => {
+    if (isPasswordResetRoute) {
+      return;
+    }
+
     if (!isAuthenticated) {
       setResult(null);
 
@@ -96,8 +129,11 @@ export default function App() {
         return PAGES.LOGIN;
       });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, isPasswordResetRoute]);
 
+  // ==========================================================
+  // EMAIL / PASSWORD LOGIN
+  // ==========================================================
   async function handleLogin(email, password) {
     await signIn(email, password);
 
@@ -105,6 +141,16 @@ export default function App() {
     setCurrentPage(PAGES.PATIENT_INPUT);
   }
 
+  // ==========================================================
+  // GOOGLE LOGIN
+  // ==========================================================
+  async function handleGoogleLogin() {
+    await signInWithGoogle();
+  }
+
+  // ==========================================================
+  // LOGOUT
+  // ==========================================================
   async function handleLogout() {
     try {
       await signOut();
@@ -114,16 +160,41 @@ export default function App() {
     }
   }
 
-  function handlePredictionComplete(predictionResult) {
+  // ==========================================================
+  // PASSWORD RESET COMPLETE
+  // ==========================================================
+  function handlePasswordResetComplete() {
+    window.history.replaceState(
+      {},
+      document.title,
+      "/",
+    );
+
+    setResult(null);
+    setCurrentPage(PAGES.LOGIN);
+  }
+
+  // ==========================================================
+  // PREDICTION COMPLETE
+  // ==========================================================
+  function handlePredictionComplete(
+    predictionResult,
+  ) {
     setResult(predictionResult);
     setCurrentPage(PAGES.DASHBOARD);
   }
 
+  // ==========================================================
+  // NEW ASSESSMENT
+  // ==========================================================
   function handleNewAssessment() {
     setResult(null);
     setCurrentPage(PAGES.PATIENT_INPUT);
   }
 
+  // ==========================================================
+  // APPLICATION NAVIGATION
+  // ==========================================================
   function handleNavigation(page) {
     if (!isAuthenticated) {
       setCurrentPage(PAGES.LOGIN);
@@ -137,14 +208,48 @@ export default function App() {
     setCurrentPage(page);
   }
 
-  if (currentPage === PAGES.SPLASH || authLoading) {
+  // ==========================================================
+  // PASSWORD RESET
+  // ==========================================================
+  if (
+    isPasswordResetRoute ||
+    currentPage === PAGES.RESET_PASSWORD
+  ) {
+    return (
+      <ResetPassword
+        onComplete={handlePasswordResetComplete}
+      />
+    );
+  }
+
+  // ==========================================================
+  // SPLASH SCREEN
+  // ==========================================================
+  if (
+    currentPage === PAGES.SPLASH ||
+    authLoading
+  ) {
     return <SplashScreen />;
   }
 
-  if (!isAuthenticated || currentPage === PAGES.LOGIN) {
-    return <LoginScreen onLogin={handleLogin} />;
+  // ==========================================================
+  // LOGIN
+  // ==========================================================
+  if (
+    !isAuthenticated ||
+    currentPage === PAGES.LOGIN
+  ) {
+    return (
+      <Login
+        onLogin={handleLogin}
+        onGoogleLogin={handleGoogleLogin}
+      />
+    );
   }
 
+  // ==========================================================
+  // AUTHENTICATED APPLICATION
+  // ==========================================================
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <Header
@@ -159,7 +264,9 @@ export default function App() {
       {currentPage === PAGES.PATIENT_INPUT && (
         <PatientInput
           apiStatus={apiStatus}
-          onPredictionComplete={handlePredictionComplete}
+          onPredictionComplete={
+            handlePredictionComplete
+          }
         />
       )}
 
@@ -173,12 +280,20 @@ export default function App() {
   );
 }
 
+// ============================================================
+// SPLASH SCREEN
+// ============================================================
 function SplashScreen() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-950 px-6">
-      <div className="w-full max-w-md text-center">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-blue-600 text-white shadow-2xl shadow-blue-950/40">
-          <HeartPulse size={42} strokeWidth={1.8} />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.16),transparent_45%)]" />
+
+      <div className="relative w-full max-w-md text-center">
+        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-blue-600 text-white shadow-2xl shadow-blue-950/50">
+          <HeartPulse
+            size={42}
+            strokeWidth={1.8}
+          />
         </div>
 
         <h1 className="mt-7 text-4xl font-bold tracking-tight text-white">
@@ -194,194 +309,25 @@ function SplashScreen() {
             size={15}
             className="animate-spin text-blue-500"
           />
+
           Initializing system
         </div>
 
         <div className="mx-auto mt-5 h-1 w-48 overflow-hidden rounded-full bg-slate-800">
           <div className="h-full w-full origin-left animate-[pulse_1.8s_ease-in-out] rounded-full bg-blue-600" />
         </div>
-      </div>
-    </main>
-  );
-}
 
-function LoginScreen({ onLogin }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    setError("");
-
-    const normalizedEmail = email.trim();
-
-    if (!normalizedEmail || !password.trim()) {
-      setError("Please enter your email and password.");
-      return;
-    }
-
-    try {
-      setIsSubmitting(true);
-
-      await onLogin(normalizedEmail, password);
-    } catch (loginError) {
-      setError(
-        loginError instanceof Error
-          ? loginError.message
-          : "Unable to sign in. Please check your credentials and try again.",
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
-  }
-
-  return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-8 sm:px-6">
-      <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
-            <HeartPulse size={34} strokeWidth={1.8} />
-          </div>
-
-          <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
-            Welcome to LAMESE AI
-          </h1>
-
-          <p className="mt-2 text-sm leading-6 text-slate-500">
-            Sign in to access the heart disease prediction system.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-          <div className="mb-7">
-            <h2 className="text-xl font-bold text-slate-900">
-              Sign in
-            </h2>
-
-            <p className="mt-1 text-sm text-slate-500">
-              Enter your account details to continue.
-            </p>
-          </div>
-
-          {error && (
-            <div
-              role="alert"
-              aria-live="polite"
-              className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700"
-            >
-              {error}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-2 block text-sm font-semibold text-slate-700"
-              >
-                Email address
-              </label>
-
-              <div className="relative">
-                <User
-                  size={18}
-                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-                />
-
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(event) => {
-                    setEmail(event.target.value);
-                    setError("");
-                  }}
-                  placeholder="you@example.com"
-                  disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-2 block text-sm font-semibold text-slate-700"
-              >
-                Password
-              </label>
-
-              <div className="relative">
-                <LockKeyhole
-                  size={18}
-                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
-                />
-
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(event) => {
-                    setPassword(event.target.value);
-                    setError("");
-                  }}
-                  placeholder="Enter your password"
-                  disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2
-                    size={18}
-                    className="animate-spin"
-                  />
-                  Signing in...
-                </>
-              ) : (
-                <>
-                  <LogIn size={18} />
-                  Sign in
-                </>
-              )}
-            </button>
-          </form>
-
-          <div className="mt-6 flex items-start gap-3 rounded-xl bg-slate-50 p-4">
-            <ShieldCheck
-              size={18}
-              className="mt-0.5 shrink-0 text-blue-600"
-            />
-
-            <p className="text-xs leading-5 text-slate-500">
-              Your account is securely authenticated through
-              Supabase Authentication.
-            </p>
-          </div>
-        </div>
-
-        <p className="mt-6 text-center text-xs text-slate-400">
-          LAMESE AI · Heart Disease Prediction System
+        <p className="mt-8 text-[11px] font-medium uppercase tracking-[0.2em] text-slate-600">
+          Explainable AI
         </p>
       </div>
     </main>
   );
 }
 
+// ============================================================
+// HEADER
+// ============================================================
 function Header({
   currentPage,
   apiStatus,
@@ -390,25 +336,30 @@ function Header({
   onNavigate,
   onLogout,
 }) {
+  const userInitial =
+    userEmail?.charAt(0)?.toUpperCase() || "U";
+
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex min-h-[73px] max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
+      <div className="mx-auto flex min-h-[72px] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
         <button
           type="button"
-          onClick={() => onNavigate(PAGES.PATIENT_INPUT)}
-          className="flex shrink-0 items-center gap-3 text-left"
+          onClick={() =>
+            onNavigate(PAGES.PATIENT_INPUT)
+          }
+          className="flex min-w-0 shrink-0 items-center gap-3 rounded-xl text-left outline-none focus-visible:ring-4 focus-visible:ring-blue-500/20"
           aria-label="Go to patient assessment"
         >
-          <div className="rounded-xl bg-blue-600 p-2 text-white shadow-sm">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 text-white shadow-sm">
             <HeartPulse size={22} />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h1 className="text-base font-bold tracking-tight text-slate-900">
               LAMESE AI
             </h1>
 
-            <p className="hidden text-xs text-slate-500 sm:block">
+            <p className="hidden truncate text-xs text-slate-500 sm:block">
               Heart Disease Prediction System
             </p>
           </div>
@@ -419,30 +370,45 @@ function Header({
           aria-label="Main navigation"
         >
           <NavigationButton
-            active={currentPage === PAGES.PATIENT_INPUT}
-            onClick={() => onNavigate(PAGES.PATIENT_INPUT)}
+            active={
+              currentPage === PAGES.PATIENT_INPUT
+            }
+            onClick={() =>
+              onNavigate(PAGES.PATIENT_INPUT)
+            }
             icon={<Activity size={16} />}
           >
             Patient Assessment
           </NavigationButton>
 
           <NavigationButton
-            active={currentPage === PAGES.DASHBOARD}
+            active={
+              currentPage === PAGES.DASHBOARD
+            }
             disabled={!hasResult}
-            onClick={() => onNavigate(PAGES.DASHBOARD)}
+            onClick={() =>
+              onNavigate(PAGES.DASHBOARD)
+            }
             icon={<BarChart3 size={16} />}
           >
             Results Dashboard
           </NavigationButton>
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <ApiStatus status={apiStatus} />
 
-          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 lg:flex">
-            <User size={14} />
+          <div
+            className="hidden items-center gap-2 rounded-full border border-slate-200 bg-slate-50 py-1.5 pl-1.5 pr-3 lg:flex"
+            title={
+              userEmail || "Authenticated user"
+            }
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-100 text-xs font-bold text-blue-700">
+              {userInitial}
+            </span>
 
-            <span className="max-w-32 truncate">
+            <span className="max-w-32 truncate text-xs font-semibold text-slate-600">
               {userEmail}
             </span>
           </div>
@@ -450,7 +416,7 @@ function Header({
           <button
             type="button"
             onClick={onLogout}
-            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
+            className="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900 focus:outline-none focus:ring-4 focus:ring-blue-500/10"
             aria-label="Sign out"
             title="Sign out"
           >
@@ -465,21 +431,29 @@ function Header({
 
       <div className="border-t border-slate-100 px-4 py-2 md:hidden">
         <nav
-          className="flex gap-1"
+          className="mx-auto flex max-w-7xl gap-1"
           aria-label="Mobile navigation"
         >
           <MobileNavigationButton
-            active={currentPage === PAGES.PATIENT_INPUT}
-            onClick={() => onNavigate(PAGES.PATIENT_INPUT)}
+            active={
+              currentPage === PAGES.PATIENT_INPUT
+            }
+            onClick={() =>
+              onNavigate(PAGES.PATIENT_INPUT)
+            }
             icon={<Activity size={15} />}
           >
             Assessment
           </MobileNavigationButton>
 
           <MobileNavigationButton
-            active={currentPage === PAGES.DASHBOARD}
+            active={
+              currentPage === PAGES.DASHBOARD
+            }
             disabled={!hasResult}
-            onClick={() => onNavigate(PAGES.DASHBOARD)}
+            onClick={() =>
+              onNavigate(PAGES.DASHBOARD)
+            }
             icon={<BarChart3 size={15} />}
           >
             Results
@@ -490,6 +464,9 @@ function Header({
   );
 }
 
+// ============================================================
+// DESKTOP NAVIGATION BUTTON
+// ============================================================
 function NavigationButton({
   active,
   disabled,
@@ -503,7 +480,7 @@ function NavigationButton({
       disabled={disabled}
       onClick={onClick}
       className={[
-        "inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition",
+        "inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold transition focus:outline-none focus:ring-4 focus:ring-blue-500/10",
         active
           ? "bg-blue-50 text-blue-700"
           : "text-slate-500 hover:bg-slate-50 hover:text-slate-800",
@@ -518,6 +495,9 @@ function NavigationButton({
   );
 }
 
+// ============================================================
+// MOBILE NAVIGATION BUTTON
+// ============================================================
 function MobileNavigationButton({
   active,
   disabled,
@@ -531,7 +511,7 @@ function MobileNavigationButton({
       disabled={disabled}
       onClick={onClick}
       className={[
-        "inline-flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold transition",
+        "inline-flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2 text-xs font-semibold transition focus:outline-none focus:ring-4 focus:ring-blue-500/10",
         active
           ? "bg-blue-50 text-blue-700"
           : "text-slate-500 hover:bg-slate-50",
@@ -546,11 +526,21 @@ function MobileNavigationButton({
   );
 }
 
+// ============================================================
+// API STATUS
+// ============================================================
 function ApiStatus({ status }) {
   if (status === "checking") {
     return (
-      <div className="flex shrink-0 items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600">
-        <Loader2 size={14} className="animate-spin" />
+      <div
+        className="flex shrink-0 items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-600"
+        role="status"
+        aria-live="polite"
+      >
+        <Loader2
+          size={14}
+          className="animate-spin"
+        />
 
         <span className="hidden lg:inline">
           Checking prediction API
@@ -565,8 +555,12 @@ function ApiStatus({ status }) {
 
   if (status === "available") {
     return (
-      <div className="flex shrink-0 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700">
-        <ShieldCheck size={14} />
+      <div
+        className="flex shrink-0 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700"
+        role="status"
+        aria-live="polite"
+      >
+        <CheckCircle2 size={14} />
 
         <span className="hidden lg:inline">
           Prediction API available
@@ -580,8 +574,12 @@ function ApiStatus({ status }) {
   }
 
   return (
-    <div className="flex shrink-0 items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700">
-      <span className="h-2 w-2 rounded-full bg-red-500" />
+    <div
+      className="flex shrink-0 items-center gap-2 rounded-full border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-700"
+      role="alert"
+      aria-live="assertive"
+    >
+      <WifiOff size={14} />
 
       <span className="hidden lg:inline">
         Prediction API unavailable
