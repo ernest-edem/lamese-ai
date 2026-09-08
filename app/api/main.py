@@ -5,22 +5,22 @@ LAMESE AI FastAPI application.
 from pathlib import Path
 
 import pandas as pd
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.schemas import (
+    PatientInput,
+    PredictionResponse,
+)
+from app.core.auth import get_current_user
 from app.core.config_loader import load_config
+from app.ml.explainability.shap_explainer import explain_prediction
 from app.ml.inference import (
     load_trained_model,
     predict_patient,
     predict_patient_probability,
 )
 from app.ml.threshold import predict_with_threshold
-from app.ml.explainability.shap_explainer import explain_prediction
-
-from app.api.schemas import (
-    PatientInput,
-    PredictionResponse,
-)
 
 
 # ==========================================================
@@ -78,7 +78,10 @@ def health_check() -> dict[str, str]:
     "/predict",
     response_model=PredictionResponse,
 )
-def predict(patient: PatientInput) -> PredictionResponse:
+def predict(
+    patient: PatientInput,
+    current_user: dict[str, object] = Depends(get_current_user),
+) -> PredictionResponse:
     settings = load_config()
 
     if settings is None:

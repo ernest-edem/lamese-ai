@@ -2,9 +2,12 @@
 Tests for the LAMESE AI FastAPI application.
 """
 
+import pytest
+from fastapi import HTTPException
 from fastapi.testclient import TestClient
 
 from app.api.main import app
+from app.core.auth import get_current_user
 from app.core.config_loader import load_config
 
 
@@ -31,11 +34,40 @@ VALID_PATIENT = {
 
 
 # ==========================================================
+# AUTHENTICATED CLIENT
+# ==========================================================
+
+@pytest.fixture
+def authenticated_client(monkeypatch):
+    """
+    Provide a test client with authentication successfully bypassed.
+
+    The actual Supabase verification is tested separately. Prediction
+    endpoint tests use this fixture so they remain deterministic and
+    do not depend on an external Supabase service.
+    """
+
+    def mock_current_user():
+        return {
+            "id": "test-user-id",
+            "email": "test@example.com",
+        }
+
+    app.dependency_overrides[get_current_user] = mock_current_user
+
+    test_client = TestClient(app)
+
+    yield test_client
+
+    app.dependency_overrides.pop(get_current_user, None)
+
+
+# ==========================================================
 # HEALTH CHECK
 # ==========================================================
 
 def test_health_check():
-    """Verify that the health endpoint is available."""
+    """Verify that the health endpoint is publicly available."""
 
     response = client.get("/health")
 
@@ -48,13 +80,66 @@ def test_health_check():
 
 
 # ==========================================================
+# AUTHENTICATION
+# ==========================================================
+
+def test_prediction_requires_authentication():
+    """Verify that prediction requests require authentication."""
+
+    response = client.post(
+        "/predict",
+        json=VALID_PATIENT,
+    )
+
+    assert response.status_code == 401
+
+    data = response.json()
+
+    assert data["detail"] == "Authentication required."
+
+
+def test_prediction_rejects_invalid_token(monkeypatch):
+    """Verify that an invalid access token is rejected."""
+
+    def reject_token(_access_token):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid or expired authentication token.",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
+        )
+
+    monkeypatch.setattr(
+        "app.core.auth.verify_supabase_access_token",
+        reject_token,
+    )
+
+    response = client.post(
+        "/predict",
+        headers={
+            "Authorization": "Bearer invalid-test-token",
+        },
+        json=VALID_PATIENT,
+    )
+
+    assert response.status_code == 401
+
+    data = response.json()
+
+    assert data["detail"] == (
+        "Invalid or expired authentication token."
+    )
+
+
+# ==========================================================
 # PREDICTION
 # ==========================================================
 
-def test_prediction_endpoint():
-    """Verify that the prediction endpoint returns a valid response."""
+def test_prediction_endpoint(authenticated_client):
+    """Verify that an authenticated prediction request succeeds."""
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=VALID_PATIENT,
     )
@@ -70,10 +155,10 @@ def test_prediction_endpoint():
     assert "explanation" in data
 
 
-def test_prediction_values():
+def test_prediction_values(authenticated_client):
     """Verify the prediction values returned by the API."""
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=VALID_PATIENT,
     )
@@ -92,7 +177,10 @@ def test_prediction_values():
     assert data["threshold"] == settings.model.threshold.selected
 
 
-def test_prediction_uses_configured_threshold(monkeypatch):
+def test_prediction_uses_configured_threshold(
+    authenticated_client,
+    monkeypatch,
+):
     """Verify that the API uses the configured selected threshold."""
 
     settings = load_config()
@@ -110,7 +198,7 @@ def test_prediction_uses_configured_threshold(monkeypatch):
         lambda: settings,
     )
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=VALID_PATIENT,
     )
@@ -122,10 +210,10 @@ def test_prediction_uses_configured_threshold(monkeypatch):
     assert data["threshold"] == 0.65
 
 
-def test_prediction_explanation():
+def test_prediction_explanation(authenticated_client):
     """Verify that SHAP returns all original model features."""
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=VALID_PATIENT,
     )
@@ -159,14 +247,14 @@ def test_prediction_explanation():
 # VALIDATION
 # ==========================================================
 
-def test_prediction_rejects_missing_field():
+def test_prediction_rejects_missing_field(authenticated_client):
     """Verify that invalid requests are rejected."""
 
     invalid_patient = VALID_PATIENT.copy()
 
     del invalid_patient["Age"]
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=invalid_patient,
     )
@@ -174,13 +262,15 @@ def test_prediction_rejects_missing_field():
     assert response.status_code == 422
 
 
-def test_prediction_rejects_invalid_fasting_blood_sugar():
+def test_prediction_rejects_invalid_fasting_blood_sugar(
+    authenticated_client,
+):
     """Verify Pydantic validation for FastingBS."""
 
     invalid_patient = VALID_PATIENT.copy()
     invalid_patient["FastingBS"] = 2
 
-    response = client.post(
+    response = authenticated_client.post(
         "/predict",
         json=invalid_patient,
     )

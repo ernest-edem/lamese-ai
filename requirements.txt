@@ -17,4 +17,4 @@ uvicorn
 
 # Testing
 pytest
-httpx2
+httpx
