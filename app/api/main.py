@@ -14,6 +14,7 @@ from app.api.schemas import (
 )
 from app.core.auth import get_current_user
 from app.core.config_loader import load_config
+from app.core.logger import logger
 from app.ml.explainability.shap_explainer import explain_prediction
 from app.ml.inference import (
     load_trained_model,
@@ -59,6 +60,11 @@ def health_check() -> dict[str, str]:
     settings = load_config()
 
     if settings is None:
+        logger.error(
+            "Health check failed: application configuration "
+            "could not be loaded."
+        )
+
         return {
             "status": "unhealthy",
             "service": "LAMESE AI",
@@ -85,6 +91,11 @@ def predict(
     settings = load_config()
 
     if settings is None:
+        logger.error(
+            "Prediction failed: application configuration "
+            "could not be loaded."
+        )
+
         raise HTTPException(
             status_code=500,
             detail="Application configuration could not be loaded.",
@@ -95,6 +106,12 @@ def predict(
     )
 
     if not model_path.exists():
+        logger.error(
+            "Prediction failed: trained model artifact was not "
+            "found at '%s'.",
+            model_path,
+        )
+
         raise HTTPException(
             status_code=500,
             detail="Trained model artifact was not found.",
@@ -145,8 +162,15 @@ def predict(
             },
         )
 
-    except Exception as exc:
+    except HTTPException:
+        raise
+
+    except Exception:
+        logger.exception(
+            "Prediction processing failed."
+        )
+
         raise HTTPException(
             status_code=500,
-            detail=f"Prediction failed: {exc}",
-        ) from exc
+            detail="Prediction processing failed.",
+        )
