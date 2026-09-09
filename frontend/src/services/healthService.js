@@ -5,7 +5,7 @@ if (!API_URL) {
 }
 
 export async function checkApiHealth() {
-  const response = await fetch(`${API_URL}/health`, {
+  const response = await fetch(`${API_URL}/ready`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -18,7 +18,10 @@ export async function checkApiHealth() {
 
   const data = await response.json();
 
-  if (data.status !== "healthy") {
+  if (
+    data.status !== "ready" ||
+    data.service !== "LAMESE AI"
+  ) {
     throw new Error("Prediction API is unavailable.");
   }
 

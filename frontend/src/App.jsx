@@ -554,24 +554,24 @@ function ApiStatus({ status }) {
   }
 
   if (status === "available") {
-    return (
-      <div
-        className="flex shrink-0 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700"
-        role="status"
-        aria-live="polite"
-      >
-        <CheckCircle2 size={14} />
+  return (
+    <div
+      className="flex shrink-0 items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs font-semibold text-emerald-700"
+      role="status"
+      aria-live="polite"
+    >
+      <CheckCircle2 size={14} />
 
-        <span className="hidden lg:inline">
-          Prediction API available
-        </span>
+      <span className="hidden lg:inline">
+        Prediction API ready
+      </span>
 
-        <span className="lg:hidden">
-          API available
-        </span>
-      </div>
-    );
-  }
+      <span className="lg:hidden">
+        API ready
+      </span>
+    </div>
+  );
+}
 
   return (
     <div
