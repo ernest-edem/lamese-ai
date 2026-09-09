@@ -57,21 +57,62 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check() -> dict[str, str]:
+    """
+    Liveness check.
+
+    Confirms that the FastAPI application is running.
+    """
+
+    return {
+        "status": "healthy",
+        "service": "LAMESE AI",
+    }
+
+
+# ==========================================================
+# READINESS CHECK
+# ==========================================================
+
+@app.get("/ready")
+def readiness_check() -> dict[str, str]:
+    """
+    Readiness check.
+
+    Confirms that the application configuration and trained
+    model artifact required for prediction are available.
+    """
+
     settings = load_config()
 
     if settings is None:
         logger.error(
-            "Health check failed: application configuration "
+            "Readiness check failed: application configuration "
             "could not be loaded."
         )
 
-        return {
-            "status": "unhealthy",
-            "service": "LAMESE AI",
-        }
+        raise HTTPException(
+            status_code=503,
+            detail="Application is not ready: configuration could not be loaded.",
+        )
+
+    model_path = Path(
+        settings.model.model_output_path
+    )
+
+    if not model_path.exists():
+        logger.error(
+            "Readiness check failed: trained model artifact was "
+            "not found at '%s'.",
+            model_path,
+        )
+
+        raise HTTPException(
+            status_code=503,
+            detail="Application is not ready: trained model artifact was not found.",
+        )
 
     return {
-        "status": "healthy",
+        "status": "ready",
         "service": "LAMESE AI",
     }
 

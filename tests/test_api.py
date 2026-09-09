@@ -80,6 +80,73 @@ def test_health_check():
 
 
 # ==========================================================
+# READINESS CHECK
+# ==========================================================
+
+def test_readiness_check():
+    """Verify that the API reports ready when configuration and model exist."""
+
+    response = client.get("/ready")
+
+    assert response.status_code == 200
+
+    data = response.json()
+
+    assert data["status"] == "ready"
+    assert data["service"] == "LAMESE AI"
+
+
+def test_readiness_rejects_missing_configuration(monkeypatch):
+    """Verify that readiness fails when configuration cannot be loaded."""
+
+    monkeypatch.setattr(
+        "app.api.main.load_config",
+        lambda: None,
+    )
+
+    response = client.get("/ready")
+
+    assert response.status_code == 503
+
+    data = response.json()
+
+    assert data["detail"] == (
+        "Application is not ready: configuration could not be loaded."
+    )
+
+
+def test_readiness_rejects_missing_model(monkeypatch, tmp_path):
+    """Verify that readiness fails when the trained model is unavailable."""
+
+    settings = load_config()
+
+    assert settings is not None
+
+    missing_model_path = tmp_path / "missing_model.pkl"
+
+    monkeypatch.setattr(
+        settings.model,
+        "model_output_path",
+        str(missing_model_path),
+    )
+
+    monkeypatch.setattr(
+        "app.api.main.load_config",
+        lambda: settings,
+    )
+
+    response = client.get("/ready")
+
+    assert response.status_code == 503
+
+    data = response.json()
+
+    assert data["detail"] == (
+        "Application is not ready: trained model artifact was not found."
+    )
+
+
+# ==========================================================
 # AUTHENTICATION
 # ==========================================================
 
