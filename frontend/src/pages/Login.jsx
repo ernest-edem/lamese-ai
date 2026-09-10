@@ -218,7 +218,7 @@ export default function Login({
             BRANDING
         ====================================================== */}
         <div className="mb-8 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20">
             <HeartPulse
               size={34}
               strokeWidth={1.8}
@@ -244,7 +244,7 @@ export default function Login({
               MODE HEADER
           ==================================================== */}
           <div className="mb-7">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-info-surface px-3 py-1.5 text-xs font-semibold text-info-text-muted">
               <ShieldCheck size={14} />
               Secure access
             </div>
@@ -325,7 +325,7 @@ export default function Login({
                   placeholder="you@example.com"
                   disabled={isBusy}
                   required
-                  className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
+                  className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:bg-slate-50"
                 />
               </div>
             </div>
@@ -345,7 +345,7 @@ export default function Login({
                     type="button"
                     onClick={handleForgotPassword}
                     disabled={isBusy}
-                    className="text-xs font-semibold text-blue-600 transition hover:text-blue-700 focus:outline-none focus:underline disabled:cursor-not-allowed disabled:opacity-60"
+                    className="text-xs font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus:underline disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {isResetSubmitting
                       ? "Sending..."
@@ -380,7 +380,7 @@ export default function Login({
                   disabled={isBusy}
                   required
                   minLength={isSignUp ? 8 : undefined}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
+                  className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:bg-slate-50"
                 />
               </div>
 
@@ -422,7 +422,7 @@ export default function Login({
                     disabled={isBusy}
                     required
                     minLength={8}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
+                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:bg-slate-50"
                   />
                 </div>
               </div>
@@ -432,7 +432,7 @@ export default function Login({
             <button
               type="submit"
               disabled={isBusy}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover focus:outline-none focus:ring-4 focus:ring-primary-focus/20 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? (
                 <>
@@ -485,7 +485,7 @@ export default function Login({
                 )
               }
               disabled={isBusy}
-              className="font-semibold text-blue-600 transition hover:text-blue-700 focus:outline-none focus:underline disabled:cursor-not-allowed disabled:opacity-60"
+              className="font-semibold text-primary transition hover:text-primary-hover focus:outline-none focus:underline disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSignUp
                 ? "Sign in"
@@ -514,7 +514,7 @@ export default function Login({
                   type="button"
                   onClick={handleGoogleSubmit}
                   disabled={isBusy}
-                  className="inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {isGoogleSubmitting ? (
                     <>
@@ -544,7 +544,7 @@ export default function Login({
           <div className="mt-6 flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
             <ShieldCheck
               size={18}
-              className="mt-0.5 shrink-0 text-blue-600"
+              className="mt-0.5 shrink-0 text-primary"
               aria-hidden="true"
             />
 

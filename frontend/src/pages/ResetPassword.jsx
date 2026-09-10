@@ -141,7 +141,7 @@ export default function ResetPassword({
             BRANDING
         ====================================================== */}
         <div className="mb-8 text-center">
-          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20">
             <HeartPulse
               size={34}
               strokeWidth={1.8}
@@ -162,7 +162,7 @@ export default function ResetPassword({
         ====================================================== */}
         <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-8">
           <div className="mb-7">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-info-surface px-3 py-1.5 text-xs font-semibold text-info-text-muted">
               <ShieldCheck size={14} />
               Secure password reset
             </div>
@@ -243,7 +243,7 @@ export default function ResetPassword({
                     disabled={isSubmitting}
                     required
                     minLength={8}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
+                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:bg-slate-50"
                   />
                 </div>
 
@@ -282,7 +282,7 @@ export default function ResetPassword({
                     disabled={isSubmitting}
                     required
                     minLength={8}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 disabled:cursor-not-allowed disabled:bg-slate-50"
+                    className="w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10 disabled:cursor-not-allowed disabled:bg-slate-50"
                   />
                 </div>
               </div>
@@ -293,7 +293,7 @@ export default function ResetPassword({
                 disabled={
                   isSubmitting || Boolean(success)
                 }
-                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover focus:outline-none focus:ring-4 focus:ring-primary-focus/20 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isSubmitting ? (
                   <>
@@ -332,7 +332,7 @@ export default function ResetPassword({
           <div className="mt-6 flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4">
             <ShieldCheck
               size={18}
-              className="mt-0.5 shrink-0 text-blue-600"
+              className="mt-0.5 shrink-0 text-primary"
               aria-hidden="true"
             />
 

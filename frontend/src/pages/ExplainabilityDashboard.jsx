@@ -49,7 +49,7 @@ export default function ExplainabilityDashboard({
         ========================================================== */}
         <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-blue-600">
+            <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-primary">
               <Activity size={18} />
               Explainable AI Dashboard
             </div>
@@ -159,7 +159,7 @@ export default function ExplainabilityDashboard({
         <section className="mt-5 rounded-2xl border border-slate-200 bg-white shadow-sm">
           <div className="border-b border-slate-100 px-5 py-5 sm:px-7">
             <div className="flex items-start gap-3">
-              <div className="rounded-xl bg-blue-50 p-2.5 text-blue-600">
+              <div className="rounded-xl bg-info-surface p-2.5 text-primary">
                 <Gauge size={20} />
               </div>
 
@@ -215,19 +215,19 @@ export default function ExplainabilityDashboard({
         {/* ==========================================================
             INTERPRETATION NOTE
         ========================================================== */}
-        <section className="mt-5 rounded-2xl border border-blue-200 bg-blue-50 p-5 sm:p-6">
+        <section className="mt-5 rounded-2xl border border-info-border bg-info-surface p-5 sm:p-6">
           <div className="flex items-start gap-3">
             <Info
-              className="mt-0.5 shrink-0 text-blue-600"
+              className="mt-0.5 shrink-0 text-primary"
               size={19}
             />
 
             <div>
-              <h3 className="text-sm font-bold text-blue-900">
+              <h3 className="text-sm font-bold text-info-text">
                 How to interpret these explanations
               </h3>
 
-              <p className="mt-1 text-sm leading-6 text-blue-800">
+              <p className="mt-1 text-sm leading-6 text-info-text-muted">
                 A positive contribution pushes the model toward the
                 Heart Disease class, while a negative contribution pushes
                 the model away from it. These values describe model
@@ -381,7 +381,7 @@ function ProbabilityGauge({ probability, threshold }) {
       <div className="relative pt-8">
         <div className="h-5 overflow-hidden rounded-full bg-slate-100">
           <div
-            className="h-full rounded-full bg-blue-600 transition-all duration-700"
+            className="h-full rounded-full bg-primary transition-all duration-700"
             style={{
               width: `${percentage}%`,
             }}
@@ -444,7 +444,7 @@ function MetricCard({
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start gap-3">
-        <div className="rounded-xl bg-slate-50 p-2.5 text-blue-600">
+        <div className="rounded-xl bg-slate-50 p-2.5 text-primary">
           {icon}
         </div>
 
@@ -485,7 +485,7 @@ function ProbabilityRow({ label, value }) {
 
       <div className="h-3 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-blue-600 transition-all duration-700"
+          className="h-full rounded-full bg-primary transition-all duration-700"
           style={{
             width: `${Math.min(Math.max(value, 0), 100)}%`,
           }}
@@ -508,7 +508,7 @@ function ContributionSummary({ type, count }) {
         className={[
           "rounded-lg p-2",
           positive
-            ? "bg-blue-50 text-blue-600"
+            ? "bg-info-surface text-primary"
             : "bg-slate-200 text-slate-600",
         ].join(" ")}
       >
@@ -564,7 +564,7 @@ function ContributionRow({
             <div
               className={[
                 "h-full rounded-full transition-all duration-500",
-                positive ? "bg-blue-600" : "bg-slate-500",
+                positive ? "bg-primary" : "bg-slate-500",
               ].join(" ")}
               style={{
                 width: `${Math.min(Math.max(magnitude, 0), 100)}%`,
@@ -575,7 +575,7 @@ function ContributionRow({
 
         <div className="flex items-center gap-2 sm:w-28 sm:justify-end">
           {positive ? (
-            <TrendingUp size={16} className="text-blue-600" />
+            <TrendingUp size={16} className="text-primary" />
           ) : (
             <TrendingDown size={16} className="text-slate-500" />
           )}

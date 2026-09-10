@@ -159,7 +159,7 @@ export default function PatientInput({
     <main className="min-h-[calc(100vh-73px)] bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
-          <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-blue-600">
+          <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-primary">
             <Activity size={18} />
             Patient Assessment
           </div>
@@ -244,7 +244,7 @@ export default function PatientInput({
                 <button
                   type="button"
                   onClick={handleNext}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover sm:w-auto"
                 >
                   Continue
                   <ArrowRight size={17} />
@@ -254,7 +254,7 @@ export default function PatientInput({
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting || apiStatus !== "available"}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
                 >
                   {isSubmitting ? (
                     <>
@@ -299,7 +299,7 @@ function StepProgress({ currentStep }) {
                     isComplete
                       ? "bg-emerald-600 text-white"
                       : isActive
-                        ? "bg-blue-600 text-white"
+                        ? "bg-primary text-white"
                         : "bg-slate-200 text-slate-500",
                   ].join(" ")}
                 >
@@ -330,7 +330,7 @@ function StepProgress({ currentStep }) {
 
       <div className="mt-4 h-1 overflow-hidden rounded-full bg-slate-200">
         <div
-          className="h-full rounded-full bg-blue-600 transition-all duration-300"
+          className="h-full rounded-full bg-primary transition-all duration-300"
           style={{
             width: `${(currentStep / STEPS.length) * 100}%`,
           }}
@@ -557,7 +557,7 @@ function ReviewSection({ title, step, onEdit, items }) {
         <button
           type="button"
           onClick={() => onEdit(step)}
-          className="text-xs font-semibold text-blue-600 hover:text-blue-700"
+          className="text-xs font-semibold text-primary hover:text-primary-hover"
         >
           Edit
         </button>
@@ -618,7 +618,7 @@ function FormField({
           placeholder={placeholder}
           className={[
             "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition",
-            "placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10",
+            "placeholder:text-slate-400 focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10",
             suffix ? "pr-20" : "",
           ].join(" ")}
         />
@@ -650,7 +650,7 @@ function SelectField({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+        className="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-focus focus:ring-4 focus:ring-primary-focus/10"
       >
         <option value="">Select an option</option>
 
