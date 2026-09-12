@@ -275,7 +275,7 @@ export default function PatientInput({
 
         <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs text-slate-500">
           <Check size={14} className="text-emerald-600" />
-          Your information is processed by the LAMESE AI prediction service.
+          Your information is processed by the Lamese-AI prediction service.
         </div>
       </div>
     </main>

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  HeartPulse,
   Loader2,
   LockKeyhole,
   LogIn,
@@ -219,14 +218,15 @@ export default function Login({
         ====================================================== */}
         <div className="mb-8 text-center">
           <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white shadow-lg shadow-primary/20">
-            <HeartPulse
-              size={34}
-              strokeWidth={1.8}
+            <img
+              src="/lamese-logo.svg"
+              alt="Lamese-AI logo"
+              className="h-12 w-12 object-contain"
             />
           </div>
 
           <h1 className="mt-5 text-3xl font-bold tracking-tight text-slate-900">
-            Welcome to LAMESE AI
+            Welcome to Lamese-AI
           </h1>
 
           <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-slate-500">
@@ -257,7 +257,7 @@ export default function Login({
 
             <p className="mt-1 text-sm text-slate-500">
               {isSignUp
-                ? "Enter your details to create your LAMESE AI account."
+                ? "Enter your details to create your Lamese-AI account."
                 : "Enter your account details to continue."}
             </p>
           </div>
@@ -559,7 +559,7 @@ export default function Login({
             FOOTER
         ====================================================== */}
         <p className="mt-6 text-center text-xs text-slate-400">
-          LAMESE AI · Heart Disease Prediction System
+          Lamese-AI · Heart Disease Prediction System
         </p>
       </div>
     </main>
