@@ -8,6 +8,9 @@ scikit-learn
 # Configuration and environment management
 python-dotenv
 
+# Firebase authentication
+firebase-admin==7.6.0
+
 # Explainable AI
 shap
 

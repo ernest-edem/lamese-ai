@@ -42,9 +42,9 @@ def authenticated_client(monkeypatch):
     """
     Provide a test client with authentication successfully bypassed.
 
-    The actual Supabase verification is tested separately. Prediction
+    The actual Firebase verification is tested separately. Prediction
     endpoint tests use this fixture so they remain deterministic and
-    do not depend on an external Supabase service.
+    do not depend on an external Firebase service.
     """
 
     def mock_current_user():
@@ -178,7 +178,7 @@ def test_prediction_rejects_invalid_token(monkeypatch):
         )
 
     monkeypatch.setattr(
-        "app.core.auth.verify_supabase_access_token",
+        "app.core.auth.verify_firebase_id_token",
         reject_token,
     )
 

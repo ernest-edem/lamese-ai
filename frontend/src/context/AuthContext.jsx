@@ -7,7 +7,6 @@ import {
 } from "react";
 
 import {
-  getSession,
   login,
   logout,
   subscribeToAuthChanges,
@@ -20,43 +19,14 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let mounted = true;
-
-    async function restoreSession() {
-      try {
-        const currentSession = await getSession();
-
-        if (mounted) {
-          setSession(currentSession);
-        }
-      } catch (error) {
-        console.error(
-          "Failed to restore authentication session:",
-          error,
-        );
-
-        if (mounted) {
-          setSession(null);
-        }
-      } finally {
-        if (mounted) {
-          setLoading(false);
-        }
-      }
-    }
-
-    restoreSession();
-
     const {
       data: { subscription },
     } = subscribeToAuthChanges((currentSession) => {
-      if (mounted) {
-        setSession(currentSession);
-      }
+      setSession(currentSession);
+      setLoading(false);
     });
 
     return () => {
-      mounted = false;
       subscription.unsubscribe();
     };
   }, []);

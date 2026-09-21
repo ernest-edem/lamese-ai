@@ -1,16 +1,18 @@
 """
 Authentication utilities for LAMESE AI.
 
-Provides server-side Supabase access-token verification
+Provides server-side Firebase ID-token verification
 for protected API endpoints.
 """
 
 import os
+from pathlib import Path
 
-import httpx
+import firebase_admin
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from firebase_admin import auth, credentials
 
 
 # ==========================================================
@@ -30,84 +32,123 @@ bearer_scheme = HTTPBearer(
 
 
 # ==========================================================
-# SUPABASE TOKEN VERIFICATION
+# FIREBASE ADMIN INITIALIZATION
 # ==========================================================
 
-def verify_supabase_access_token(
-    access_token: str,
+def initialize_firebase() -> None:
+    """
+    Initialize the Firebase Admin SDK using the service-account
+    credentials configured through the environment.
+    """
+
+    if firebase_admin._apps:
+        return
+
+    credentials_path = os.getenv(
+        "FIREBASE_CREDENTIALS_PATH"
+    )
+
+    if not credentials_path:
+        raise RuntimeError(
+            "FIREBASE_CREDENTIALS_PATH is not configured."
+        )
+
+    credential_file = Path(credentials_path)
+
+    if not credential_file.exists():
+        raise RuntimeError(
+            "Firebase credentials file was not found."
+        )
+
+    credential = credentials.Certificate(
+        str(credential_file)
+    )
+
+    firebase_admin.initialize_app(
+        credential
+    )
+
+
+try:
+    initialize_firebase()
+
+except Exception:
+    # Firebase initialization is intentionally deferred until
+    # authentication is requested so the application can still
+    # start and expose public health/readiness endpoints.
+    pass
+
+
+# ==========================================================
+# FIREBASE TOKEN VERIFICATION
+# ==========================================================
+
+def verify_firebase_id_token(
+    id_token: str,
 ) -> dict[str, object]:
     """
-    Verify a Supabase access token and return the authenticated user.
+    Verify a Firebase ID token and return the authenticated user.
 
-    The token is validated by Supabase Auth through the
-    /auth/v1/user endpoint.
+    Raises HTTP 401 for invalid or expired tokens.
+    Raises HTTP 500 when Firebase authentication is not configured.
     """
 
-    supabase_url = os.getenv("SUPABASE_URL")
-    supabase_anon_key = os.getenv("SUPABASE_ANON_KEY")
-
-    if not supabase_url or not supabase_anon_key:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Authentication service is not configured.",
-        )
-
     try:
-        timeout = httpx.Timeout(
-            connect=3.0,
-            read=5.0,
-            write=5.0,
-            pool=5.0,
+        initialize_firebase()
+
+        decoded_token = auth.verify_id_token(
+            id_token
         )
 
-        with httpx.Client(
-            timeout=timeout,
-        ) as client:
-            response = client.get(
-                f"{supabase_url.rstrip('/')}/auth/v1/user",
-                headers={
-                    "apikey": supabase_anon_key,
-                    "Authorization": f"Bearer {access_token}",
-                },
-            )
-
-    except httpx.TimeoutException as exc:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Authentication service timed out.",
-        ) from exc
-
-    except httpx.RequestError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Authentication service is unavailable.",
-        ) from exc
-
-    if response.status_code in (401, 403):
+    except ValueError as exc:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired authentication token.",
             headers={
                 "WWW-Authenticate": "Bearer",
             },
-        )
+        ) from exc
 
-    if response.status_code != 200:
+    except auth.InvalidIdTokenError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired authentication token.",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
+        ) from exc
+
+    except auth.ExpiredIdTokenError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired authentication token.",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
+        ) from exc
+
+    except auth.RevokedIdTokenError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired authentication token.",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
+        ) from exc
+
+    except RuntimeError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Authentication service is not configured.",
+        ) from exc
+
+    except Exception as exc:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Authentication service is unavailable.",
-        )
-
-    try:
-        user = response.json()
-
-    except ValueError as exc:
-        raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-            detail="Authentication service returned an invalid response.",
         ) from exc
 
-    if not isinstance(user, dict) or not user.get("id"):
+    if not isinstance(decoded_token, dict):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication token.",
@@ -116,7 +157,18 @@ def verify_supabase_access_token(
             },
         )
 
-    return user
+    user_id = decoded_token.get("uid")
+
+    if not user_id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid authentication token.",
+            headers={
+                "WWW-Authenticate": "Bearer",
+            },
+        )
+
+    return decoded_token
 
 
 # ==========================================================
@@ -129,7 +181,7 @@ def get_current_user(
     ),
 ) -> dict[str, object]:
     """
-    Return the currently authenticated Supabase user.
+    Return the currently authenticated Firebase user.
 
     Raises HTTP 401 when a valid Bearer token is not provided.
     """
@@ -152,6 +204,6 @@ def get_current_user(
             },
         )
 
-    return verify_supabase_access_token(
+    return verify_firebase_id_token(
         credentials.credentials
     )

@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient";
+import { getAccessToken } from "./authService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -14,20 +14,21 @@ if (!API_URL) {
 
 export async function predictPatient(patient) {
   // ----------------------------------------------------------
-  // Get the current authenticated session
+  // Get the current Firebase ID token
   // ----------------------------------------------------------
-  const {
-    data: { session },
-    error: sessionError,
-  } = await supabase.auth.getSession();
+  let accessToken;
 
-  if (sessionError) {
+  try {
+    accessToken = await getAccessToken();
+  } catch (error) {
     throw new Error(
-      "Unable to retrieve the authentication session.",
+      error instanceof Error
+        ? error.message
+        : "Unable to retrieve the authentication token.",
     );
   }
 
-  if (!session?.access_token) {
+  if (!accessToken) {
     throw new Error(
       "Your session has expired. Please sign in again.",
     );
@@ -40,7 +41,7 @@ export async function predictPatient(patient) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${session.access_token}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(patient),
   });

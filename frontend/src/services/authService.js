@@ -1,5 +1,33 @@
+import {
+  browserLocalPersistence,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  setPersistence,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updatePassword,
+} from "firebase/auth";
 
-import { supabase } from "./supabaseClient";
+import { firebaseAuth } from "./firebaseClient";
+
+const googleProvider = new GoogleAuthProvider();
+
+// ============================================================
+// SESSION HELPERS
+// ============================================================
+
+function createSession(user) {
+  if (!user) {
+    return null;
+  }
+
+  return {
+    user,
+  };
+}
 
 // ============================================================
 // EMAIL / PASSWORD LOGIN
@@ -9,17 +37,30 @@ export async function login(email, password) {
     throw new Error("Email and password are required.");
   }
 
-  const { data, error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+  try {
+    await setPersistence(
+      firebaseAuth,
+      browserLocalPersistence,
+    );
 
-  if (error) {
-    throw new Error(error.message);
+    const credential =
+      await signInWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password,
+      );
+
+    return {
+      session: createSession(credential.user),
+      user: credential.user,
+    };
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to sign in. Please check your credentials and try again.",
+    );
   }
-
-  return data;
 }
 
 // ============================================================
@@ -30,35 +71,58 @@ export async function signUp(email, password) {
     throw new Error("Email and password are required.");
   }
 
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
+  try {
+    await setPersistence(
+      firebaseAuth,
+      browserLocalPersistence,
+    );
 
-  if (error) {
-    throw new Error(error.message);
+    const credential =
+      await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password,
+      );
+
+    return {
+      session: createSession(credential.user),
+      user: credential.user,
+    };
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to create your account. Please try again.",
+    );
   }
-
-  return data;
 }
 
 // ============================================================
-// GOOGLE OAUTH
+// GOOGLE AUTH
 // ============================================================
 export async function signInWithGoogle() {
-  const { data, error } =
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: window.location.origin,
-      },
-    });
+  try {
+    await setPersistence(
+      firebaseAuth,
+      browserLocalPersistence,
+    );
 
-  if (error) {
-    throw new Error(error.message);
+    const credential = await signInWithPopup(
+      firebaseAuth,
+      googleProvider,
+    );
+
+    return {
+      session: createSession(credential.user),
+      user: credential.user,
+    };
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to continue with Google. Please try again.",
+    );
   }
-
-  return data;
 }
 
 // ============================================================
@@ -69,13 +133,21 @@ export async function resetPassword(email) {
     throw new Error("Email address is required.");
   }
 
-  const { error } =
-    await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-
-  if (error) {
-    throw new Error(error.message);
+  try {
+    await sendPasswordResetEmail(
+      firebaseAuth,
+      email,
+      {
+        url: `${window.location.origin}/reset-password`,
+        handleCodeInApp: true,
+      },
+    );
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to send the password reset email. Please try again.",
+    );
   }
 }
 
@@ -83,10 +155,14 @@ export async function resetPassword(email) {
 // LOGOUT
 // ============================================================
 export async function logout() {
-  const { error } = await supabase.auth.signOut();
-
-  if (error) {
-    throw new Error(error.message);
+  try {
+    await signOut(firebaseAuth);
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to sign out. Please try again.",
+    );
   }
 }
 
@@ -94,23 +170,75 @@ export async function logout() {
 // GET CURRENT SESSION
 // ============================================================
 export async function getSession() {
-  const { data, error } =
-    await supabase.auth.getSession();
-
-  if (error) {
-    throw new Error(error.message);
-  }
-
-  return data.session;
+  return createSession(firebaseAuth.currentUser);
 }
 
 // ============================================================
 // AUTH STATE SUBSCRIPTION
 // ============================================================
 export function subscribeToAuthChanges(callback) {
-  return supabase.auth.onAuthStateChange(
-    (_event, session) => {
-      callback(session);
+  const unsubscribe = onAuthStateChanged(
+    firebaseAuth,
+    (user) => {
+      callback(createSession(user));
     },
   );
+
+  return {
+    data: {
+      subscription: {
+        unsubscribe,
+      },
+    },
+  };
+}
+
+// ============================================================
+// UPDATE PASSWORD
+// ============================================================
+export async function updateUserPassword(password) {
+  if (!password) {
+    throw new Error("Password is required.");
+  }
+
+  const user = firebaseAuth.currentUser;
+
+  if (!user) {
+    throw new Error(
+      "Your session has expired. Please sign in again.",
+    );
+  }
+
+  try {
+    await updatePassword(user, password);
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to update your password. Please try again.",
+    );
+  }
+}
+
+// ============================================================
+// GET CURRENT USER ID TOKEN
+// ============================================================
+export async function getAccessToken() {
+  const user = firebaseAuth.currentUser;
+
+  if (!user) {
+    throw new Error(
+      "Your session has expired. Please sign in again.",
+    );
+  }
+
+  try {
+    return await user.getIdToken();
+  } catch (error) {
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Unable to retrieve the authentication token.",
+    );
+  }
 }

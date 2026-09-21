@@ -2,7 +2,7 @@
 
 LAMESE AI is a full-stack machine learning application for heart disease risk prediction using structured patient health data.
 
-The project combines a trained and persisted machine learning pipeline with a FastAPI backend, Supabase authentication, a React frontend, configurable decision thresholding, and SHAP based explainability.
+The project combines a trained and persisted machine learning pipeline with a FastAPI backend, Firebase authentication, a React frontend, configurable decision thresholding, and SHAP based explainability.
 
 > **Medical disclaimer:** LAMESE AI is an educational and research oriented machine learning project. Its predictions are not medical diagnoses and should not be used as a substitute for professional medical advice, examination, or treatment.
 
@@ -52,11 +52,11 @@ The project combines a trained and persisted machine learning pipeline with a Fa
 ## Technology Stack
 
 | Area             | Technologies                                 |
-| ---------------- | -------------------------------------------- |
+| ---------------- |----------------------------------------------|
 | Frontend         | React, Vite, Tailwind CSS, Lucide React      |
 | Backend          | Python 3.11, FastAPI, Uvicorn, Pydantic      |
 | Machine Learning | scikit-learn, pandas, NumPy, SHAP            |
-| Authentication   | Supabase Auth                                |
+| Authentication   | Firebase Authentication                      |
 | Testing          | pytest, HTTPX                                |
 | Deployment       | Docker, Docker Compose                       |
 | Configuration    | JSON configuration and environment variables |
@@ -316,7 +316,7 @@ Checks whether the application configuration and required model artifact are ava
 POST /predict
 ```
 
-The prediction endpoint requires an authenticated Supabase access token.
+The prediction endpoint requires an authenticated Firebase ID token.
 
 The request contains validated patient health information. The response includes:
 
@@ -326,11 +326,11 @@ The request contains validated patient health information. The response includes
 * Selected threshold
 * SHAP explanation
 
-The backend verifies the Supabase bearer token before processing prediction requests.
+The backend verifies the Firebase bearer token before processing prediction requests.
 
 ## Authentication
 
-Authentication is handled through Supabase Auth.
+Authentication is handled through Firebase Authentication.
 
 The frontend currently supports:
 
@@ -340,11 +340,11 @@ The frontend currently supports:
 * Sign out
 * Password reset
 
-The frontend obtains the authenticated Supabase session and sends its access token to the backend.
+The frontend obtains the authenticated Firebase session and sends its access token to the backend.
 
 The backend validates the token before allowing access to `/predict`.
 
-The frontend manages the user session through Supabase Auth, while the API independently verifies the Supabase access token before processing prediction requests.
+The frontend manages the user session through Firebase Authentication, while the API independently verifies the Firebase ID token before processing prediction requests.
 
 ## Frontend
 
@@ -439,7 +439,7 @@ lamese-ai/
 │           ├── authService.js
 │           ├── healthService.js
 │           ├── predictionService.js
-│           └── supabaseClient.js
+│           └── firebaseClient.js
 │
 ├── tests/
 ├── .dockerignore
@@ -457,8 +457,7 @@ lamese-ai/
 The backend requires:
 
 ```text
-SUPABASE_URL=
-SUPABASE_ANON_KEY=
+FIREBASE_CREDENTIALS_PATH=
 ```
 
 ### Frontend
@@ -467,8 +466,12 @@ The frontend requires:
 
 ```text
 VITE_API_URL=
-VITE_SUPABASE_URL=
-VITE_SUPABASE_ANON_KEY=
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
 ```
 
 Create the appropriate local environment file for the frontend.
