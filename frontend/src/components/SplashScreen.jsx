@@ -6,16 +6,12 @@ export default function SplashScreen() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(37,99,235,0.12),transparent_45%)]" />
 
       <div className="relative w-full max-w-md text-center">
-        <div className="relative mx-auto flex h-24 w-24 items-center justify-center">
-          <div className="absolute inset-0 animate-ping rounded-3xl bg-primary/10" />
-
-          <div className="relative flex h-20 w-20 items-center justify-center rounded-3xl bg-primary shadow-2xl shadow-primary/30">
-            <img
-              src="/lamese-logo.svg"
-              alt="Lamese-AI logo"
-              className="h-16 w-16 object-contain"
-            />
-          </div>
+        <div className="mx-auto flex h-24 w-24 items-center justify-center">
+          <img
+            src="/lamese-logo.svg"
+            alt="Lamese-AI logo"
+            className="h-20 w-20 animate-[fade-in_1.2s_ease-out_both] object-contain"
+          />
         </div>
 
         <h1 className="mt-7 text-4xl font-bold tracking-tight text-text">
