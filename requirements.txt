@@ -1,23 +1,22 @@
 # Core data processing
-pandas
-numpy
+pandas==3.0.3
+numpy==2.4.6
 
 # Machine Learning
-scikit-learn
-
-# Configuration and environment management
-python-dotenv
+scikit-learn==1.9.0
+python-dotenv==1.2.2
 
 # Firebase authentication
 firebase-admin==7.6.0
 
 # Explainable AI
-shap
+shap==0.51.0
 
 # API framework
-fastapi
-uvicorn
+fastapi==0.141.1
+pydantic==2.13.4
+uvicorn==0.52.1
 
 # Testing
-pytest
-httpx
+pytest==9.1.1
+httpx==0.28.1
