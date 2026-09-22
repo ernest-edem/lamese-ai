@@ -379,7 +379,9 @@ The results dashboard presents the prediction, probability, threshold based resu
 lamese-ai/
 │
 ├── app/
+│   ├── application.py
 │   ├── api/
+│   │   ├── __init__.py
 │   │   ├── main.py
 │   │   └── schemas.py
 │   │
@@ -390,6 +392,7 @@ lamese-ai/
 │   │   └── settings.py
 │   │
 │   ├── data/
+│   │   ├── __init__.py
 │   │   ├── dataset_loader.py
 │   │   ├── exceptions.py
 │   │   ├── preprocessor.py
@@ -397,17 +400,24 @@ lamese-ai/
 │   │   └── validator.py
 │   │
 │   └── ml/
+│       ├── __init__.py
 │       ├── cross_validation.py
 │       ├── evaluate_model.py
 │       ├── evaluator.py
+│       ├── exceptions.py
 │       ├── inference.py
 │       ├── model_factory.py
 │       ├── model_persistence.py
 │       ├── pipeline.py
 │       ├── predictor.py
+│       ├── protocol.py
 │       ├── threshold.py
 │       ├── trainer.py
+│       ├── training.py
+│       ├── train_model.py
+│       ├── tuner.py
 │       └── explainability/
+│           ├── __init__.py
 │           └── shap_explainer.py
 │
 ├── artifacts/
