@@ -14,7 +14,7 @@ import PatientInput from "./pages/PatientInput";
 import ExplainabilityDashboard from "./pages/ExplainabilityDashboard";
 import SplashScreen from "./components/SplashScreen";
 
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/useAuth";
 import { checkApiHealth } from "./services/healthService";
 import { signInWithGoogle } from "./services/authService";
 
@@ -37,14 +37,16 @@ export default function App() {
     signOut,
   } = useAuth();
 
+  const isPasswordResetRoute =
+    window.location.pathname === "/reset-password";
+
   const [currentPage, setCurrentPage] = useState(
-    PAGES.SPLASH,
+    isPasswordResetRoute
+      ? PAGES.RESET_PASSWORD
+      : PAGES.SPLASH,
   );
   const [result, setResult] = useState(null);
   const [apiStatus, setApiStatus] = useState("checking");
-
-  const isPasswordResetRoute =
-    window.location.pathname === "/reset-password";
 
   // ==========================================================
   // API HEALTH CHECK
@@ -72,15 +74,6 @@ export default function App() {
       mounted = false;
     };
   }, []);
-
-  // ==========================================================
-  // PASSWORD RESET ROUTING
-  // ==========================================================
-  useEffect(() => {
-    if (isPasswordResetRoute) {
-      setCurrentPage(PAGES.RESET_PASSWORD);
-    }
-  }, [isPasswordResetRoute]);
 
   // ==========================================================
   // SPLASH / INITIAL AUTH ROUTING
@@ -116,30 +109,6 @@ export default function App() {
     isPasswordResetRoute,
     result,
   ]);
-
-  // ==========================================================
-  // AUTHENTICATION STATE GUARD
-  // ==========================================================
-  useEffect(() => {
-    if (isPasswordResetRoute) {
-      return;
-    }
-
-    if (!isAuthenticated) {
-      setResult(null);
-
-      setCurrentPage((page) => {
-        if (
-          page === PAGES.SPLASH ||
-          page === PAGES.LOGIN
-        ) {
-          return page;
-        }
-
-        return PAGES.LOGIN;
-      });
-    }
-  }, [isAuthenticated, isPasswordResetRoute]);
 
   // ==========================================================
   // EMAIL / PASSWORD LOGIN

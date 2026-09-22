@@ -59,6 +59,7 @@ export async function login(email, password) {
       error instanceof Error
         ? error.message
         : "Unable to sign in. Please check your credentials and try again.",
+      { cause: error },
     );
   }
 }
@@ -93,6 +94,7 @@ export async function signUp(email, password) {
       error instanceof Error
         ? error.message
         : "Unable to create your account. Please try again.",
+      { cause: error },
     );
   }
 }
@@ -121,6 +123,7 @@ export async function signInWithGoogle() {
       error instanceof Error
         ? error.message
         : "Unable to continue with Google. Please try again.",
+      { cause: error },
     );
   }
 }
@@ -147,6 +150,7 @@ export async function resetPassword(email) {
       error instanceof Error
         ? error.message
         : "Unable to send the password reset email. Please try again.",
+      { cause: error },
     );
   }
 }
@@ -162,6 +166,7 @@ export async function logout() {
       error instanceof Error
         ? error.message
         : "Unable to sign out. Please try again.",
+      { cause: error },
     );
   }
 }
@@ -216,6 +221,7 @@ export async function updateUserPassword(password) {
       error instanceof Error
         ? error.message
         : "Unable to update your password. Please try again.",
+      { cause: error },
     );
   }
 }
@@ -239,6 +245,7 @@ export async function getAccessToken() {
       error instanceof Error
         ? error.message
         : "Unable to retrieve the authentication token.",
+      { cause: error },
     );
   }
 }

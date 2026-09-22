@@ -1,6 +1,4 @@
 import {
-  createContext,
-  useContext,
   useEffect,
   useMemo,
   useState,
@@ -12,7 +10,7 @@ import {
   subscribeToAuthChanges,
 } from "../services/authService";
 
-const AuthContext = createContext(null);
+import { AuthContext } from "./AuthContext.js";
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
@@ -64,16 +62,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error(
-      "useAuth must be used inside an AuthProvider.",
-    );
-  }
-
-  return context;
 }

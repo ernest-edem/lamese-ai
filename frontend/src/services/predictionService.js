@@ -25,6 +25,7 @@ export async function predictPatient(patient) {
       error instanceof Error
         ? error.message
         : "Unable to retrieve the authentication token.",
+      { cause: error },
     );
   }
 
