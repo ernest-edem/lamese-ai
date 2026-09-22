@@ -284,7 +284,7 @@ function Header({
           className="flex min-w-0 shrink-0 items-center gap-3 rounded-xl text-left outline-none focus-visible:ring-4 focus-visible:ring-primary-focus/20"
           aria-label="Go to patient assessment"
         >
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white shadow-sm">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center">
             <img
               src="/lamese-logo.svg"
               alt="Lamese-AI logo"
