@@ -115,13 +115,13 @@ export default function ExplainabilityDashboard({
 
           <MetricCard
             icon={<ShieldCheck size={21} />}
-            label="Threshold Prediction"
+            label="Threshold-Based Prediction"
             value={
               thresholdPrediction === 1
                 ? "Heart Disease"
                 : "No Heart Disease"
             }
-            description="Prediction after applying the configured threshold"
+            description="Class assigned after applying the configured probability threshold"
           />
         </section>
 
@@ -362,7 +362,7 @@ function ProbabilityGauge({ probability, threshold }) {
           </p>
 
           <p className="mt-1 text-sm text-slate-500">
-            Model confidence for Heart Disease
+            Predicted probability of Heart Disease
           </p>
         </div>
 
@@ -374,7 +374,9 @@ function ProbabilityGauge({ probability, threshold }) {
               : "bg-emerald-50 text-emerald-700",
           ].join(" ")}
         >
-          {aboveThreshold ? "Above threshold" : "Below threshold"}
+          {aboveThreshold
+              ? "Positive at threshold"
+              : "Negative at threshold"}
         </span>
       </div>
 
