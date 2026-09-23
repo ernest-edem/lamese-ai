@@ -5,6 +5,7 @@ Provides server-side Firebase ID-token verification
 for protected API endpoints.
 """
 
+import logging
 import os
 from pathlib import Path
 
@@ -20,6 +21,13 @@ from firebase_admin import auth, credentials
 # ==========================================================
 
 load_dotenv()
+
+
+# ==========================================================
+# LOGGING
+# ==========================================================
+
+logger = logging.getLogger(__name__)
 
 
 # ==========================================================
@@ -101,6 +109,12 @@ def verify_firebase_id_token(
         )
 
     except ValueError as exc:
+        logger.warning(
+            "Firebase ID token verification failed: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired authentication token.",
@@ -110,6 +124,12 @@ def verify_firebase_id_token(
         ) from exc
 
     except auth.InvalidIdTokenError as exc:
+        logger.warning(
+            "Firebase ID token verification failed: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired authentication token.",
@@ -119,6 +139,12 @@ def verify_firebase_id_token(
         ) from exc
 
     except auth.ExpiredIdTokenError as exc:
+        logger.warning(
+            "Firebase ID token verification failed: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired authentication token.",
@@ -128,6 +154,12 @@ def verify_firebase_id_token(
         ) from exc
 
     except auth.RevokedIdTokenError as exc:
+        logger.warning(
+            "Firebase ID token verification failed: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid or expired authentication token.",
@@ -137,18 +169,35 @@ def verify_firebase_id_token(
         ) from exc
 
     except RuntimeError as exc:
+        logger.error(
+            "Firebase authentication configuration error: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Authentication service is not configured.",
         ) from exc
 
     except Exception as exc:
+        logger.error(
+            "Firebase authentication service error: %s: %s",
+            type(exc).__name__,
+            str(exc),
+        )
+
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail="Authentication service is unavailable.",
         ) from exc
 
     if not isinstance(decoded_token, dict):
+        logger.warning(
+            "Firebase ID token verification returned an invalid payload type: %s",
+            type(decoded_token).__name__,
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication token.",
@@ -160,6 +209,10 @@ def verify_firebase_id_token(
     user_id = decoded_token.get("uid")
 
     if not user_id:
+        logger.warning(
+            "Firebase ID token verification returned a payload without a user ID."
+        )
+
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication token.",
