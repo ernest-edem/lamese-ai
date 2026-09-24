@@ -179,6 +179,18 @@ HeartDisease
 
 The target represents the heart disease classification used by the dataset.
 
+### Dataset Source and Attribution
+
+The dataset used in this project is the **Heart Failure Prediction Dataset** published by **fedesoriano** on Kaggle in 2021.
+
+Source:
+
+https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction
+
+The dataset combines five previously independent heart disease datasets: Cleveland, Hungarian, Switzerland, Long Beach VA, and Statlog. The combined dataset originally contained 1,190 records. After duplicate records were removed, the published dataset contains 918 records and 11 input features with one target variable.
+
+The dataset is a separately sourced resource from the LAMESE AI source code. The MIT License in this repository applies to the project source code and does not replace the licensing or attribution terms associated with the dataset. Published sources have described the dataset under different licensing terms, so the original dataset source should be consulted for the applicable terms when redistributing the data.
+
 ## Data Preprocessing
 
 The machine learning pipeline separates numerical and categorical features.
