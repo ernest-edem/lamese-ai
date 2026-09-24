@@ -86,12 +86,12 @@ The project combines a trained and persisted machine learning pipeline with a Fa
                                  │
                                  ▼
                     ┌─────────────────────────┐
-                    │ Persisted ML Pipeline    │
+                    │ Persisted ML Pipeline   │
                     │                         │
-                    │ Preprocessing            │
-                    │ Random Forest            │
-                    │ Probability              │
-                    │ Threshold                │
+                    │ Preprocessing           │
+                    │ Random Forest           │
+                    │ Probability             │
+                    │ Threshold               │
                     └────────────┬────────────┘
                                  │
                                  ▼
