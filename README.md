@@ -6,6 +6,24 @@ The project combines a trained and persisted machine learning pipeline with a Fa
 
 > **Medical disclaimer:** LAMESE AI is an educational and research oriented machine learning project. Its predictions are not medical diagnoses and should not be used as a substitute for professional medical advice, examination, or treatment.
 
+## Screenshots
+
+### Login
+
+![LAMESE AI login screen](docs/screenshots/login.png)
+
+### Patient Assessment
+
+![LAMESE AI patient assessment form](docs/screenshots/patient-assessment.png)
+
+### Prediction Result
+
+![LAMESE AI prediction result](docs/screenshots/prediction-result.png)
+
+### Explainability Dashboard
+
+![LAMESE AI explainability dashboard](docs/screenshots/explainability-dashboard.png)
+
 ## Features
 
 ### Machine Learning
