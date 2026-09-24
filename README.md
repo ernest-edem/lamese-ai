@@ -28,7 +28,7 @@ The project combines a trained and persisted machine learning pipeline with a Fa
 * Authenticated prediction requests
 * Four step patient assessment form
 * Prediction probability display
-* Threshold based classification
+* Threshold-Based classification
 * SHAP feature contribution display
 * API availability monitoring
 * New assessment workflow
@@ -58,7 +58,7 @@ The project combines a trained and persisted machine learning pipeline with a Fa
 | Machine Learning | scikit-learn, pandas, NumPy, SHAP            |
 | Authentication   | Firebase Authentication                      |
 | Testing          | pytest, HTTPX                                |
-| Deployment       | Docker, Docker Compose                       |
+| Deployment       | Render, Docker, Docker Compose               |
 | Configuration    | JSON configuration and environment variables |
 
 ## System Architecture
@@ -322,7 +322,7 @@ The request contains validated patient health information. The response includes
 
 * Prediction
 * Probability
-* Threshold based prediction
+* Threshold-Based prediction
 * Selected threshold
 * SHAP explanation
 
@@ -371,7 +371,7 @@ The patient assessment is divided into four stages:
 3. Clinical Measurements
 4. Review and Analysis
 
-The results dashboard presents the prediction, probability, threshold based result, and SHAP feature contributions.
+The results dashboard presents the prediction, probability, Threshold-Based result, and SHAP feature contributions.
 
 ## Project Structure
 
@@ -531,6 +531,71 @@ http://localhost:5173
 
 The actual URL displayed by Vite should be used if the development server selects a different port.
 
+## Production Deployment
+
+LAMESE AI is deployed using Render.
+
+### Frontend
+
+The React frontend is deployed as a Render Static Site.
+
+Production URL:
+
+```text
+https://lamese-ai.onrender.com
+```
+
+The frontend uses the production backend URL through:
+
+```text
+VITE_API_URL=https://lamese-ai-api.onrender.com
+```
+
+Firebase Authentication is configured for the production frontend domain.
+
+### Backend
+
+The FastAPI backend is deployed as a Render Web Service using the project Dockerfile.
+
+Production URL:
+
+```text
+https://lamese-ai-api.onrender.com
+```
+
+The backend uses a Render secret file for the Firebase Admin SDK service account credentials.
+
+The production backend exposes:
+
+```http
+GET /health
+GET /ready
+POST /predict
+```
+
+The `/predict` endpoint requires a valid Firebase ID token.
+
+### Production Architecture
+
+```text
+Render Static Site
+        │
+        │ HTTPS
+        ▼
+React Frontend
+        │
+        │ Firebase ID Token
+        ▼
+Render Web Service
+        │
+        │ Docker
+        ▼
+FastAPI Backend
+        │
+        ▼
+Persisted ML Pipeline
+```
+
 ## Testing
 
 Run the backend test suite from the project root:
@@ -561,7 +626,7 @@ The current build used:
 
 ```text
 Vite 8.2.2
-1,887 modules transformed
+1,857 modules transformed
 ```
 
 Generated asset filenames are intentionally not documented because Vite generates hashed filenames during each build.
@@ -791,7 +856,6 @@ Potential future work includes:
 * Production observability
 * More comprehensive frontend testing
 * Accessibility improvements
-* Cloud deployment
 * Further clinical validation research
 
 These improvements depend on the intended research, educational, and deployment requirements of the project.
